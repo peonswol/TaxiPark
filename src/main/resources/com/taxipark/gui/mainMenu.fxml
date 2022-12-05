@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1130.0" styleClass="wall" stylesheets="@designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.MainMenuController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6c9ef6" height="129.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="621.0" />
+      <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="38.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../content/taxi.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="addNewCar" layoutX="38.0" layoutY="116.0" mnemonicParsing="false" onAction="#onAddNewCarClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Додати 🚗" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7a434" height="640.0" layoutX="620.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" styleClass="yellowRectangle" width="510.0" />
+      <Button fx:id="showListCars" layoutX="38.0" layoutY="171.0" mnemonicParsing="false" onAction="#onShowListCarsClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Список авто" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="searchCarByID" layoutX="303.0" layoutY="116.0" mnemonicParsing="false" onAction="#onSearchCarByIDClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="🔎 ID авто" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="712.0" layoutY="34.0" prefHeight="221.0" prefWidth="297.0" text="Ви успішно увійшли в систему!" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font name="Segoe UI Light" size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="addNewAdmin" layoutX="774.0" layoutY="442.0" mnemonicParsing="false" onAction="#onAddNewAdminClick" prefHeight="37.0" prefWidth="205.0" stylesheets="@designProject.css" text="Додати адміністратора" textFill="#eef1f5">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="button" />
+            <String fx:value="buttonOnYellowWall" />
+         </styleClass>
+      </Button>
+      <ImageView fitHeight="414.0" fitWidth="621.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../content/3644592.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="97.0" layoutY="38.0" prefHeight="25.0" prefWidth="250.0" text="PEONSWOLY TAXI" textFill="WHITE">
+         <font>
+            <Font name="Bauhaus 93" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson" alignment="CENTER" contentDisplay="CENTER" layoutX="622.0" layoutY="272.0" prefHeight="28.0" prefWidth="510.0" text="Ваш логін" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="positionPerson" alignment="CENTER" layoutX="622.0" layoutY="326.0" prefHeight="28.0" prefWidth="510.0" text="Ваша посада" textFill="#f1e9db">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="showCostCars" layoutX="303.0" layoutY="171.0" mnemonicParsing="false" onAction="#onShowCostCarsClick" prefHeight="37.0" prefWidth="188.0" styleClass="buttonOnBlueWall" text="Вартість автопарку" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

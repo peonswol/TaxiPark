@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wall" stylesheets="@designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.SearchCarByIDController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7a434" height="640.0" layoutX="856.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" styleClass="yellowRectangle" width="274.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6c9ef6" height="543.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="856.0" />
+      <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="35.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../content/taxi.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="editCarData" layoutX="897.0" layoutY="255.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnYellowWall" text="Редагувати дані авто" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="showMenu" layoutX="897.0" layoutY="350.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnYellowWall" text="Видали авто з бази" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="addNewAdmin" layoutX="897.0" layoutY="453.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="205.0" stylesheets="@designProject.css" text="Меню" textFill="#eef1f5">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="button" />
+            <String fx:value="buttonOnYellowWall" />
+         </styleClass>
+      </Button>
+      <Label layoutX="100.0" layoutY="37.0" prefHeight="25.0" prefWidth="250.0" text="PEONSWOLY TAXI" textFill="WHITE">
+         <font>
+            <Font name="Bauhaus 93" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="251.0" prefHeight="28.0" prefWidth="294.0" text="Вартість -----------------------------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelInfo" alignment="CENTER" layoutX="866.0" layoutY="16.0" prefHeight="100.0" prefWidth="267.0" text="Виберіть ID для пошуку авто :" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font name="Segoe UI Light" size="33.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="iDsCar" layoutX="897.0" layoutY="170.0" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #A2BDF5;" />
+      <Label fx:id="loginPerson1" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="210.0" prefHeight="28.0" prefWidth="294.0" text="Рік збірки --------------------------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="markAndModel" alignment="TOP_LEFT" layoutX="328.0" layoutY="172.0" prefHeight="28.0" prefWidth="294.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson1111111" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="172.0" prefHeight="28.0" prefWidth="294.0" text="Марка і модель --------------------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="yearManufacture" alignment="TOP_LEFT" layoutX="328.0" layoutY="210.0" prefHeight="28.0" prefWidth="132.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="cost" alignment="TOP_LEFT" layoutX="328.0" layoutY="251.0" prefHeight="28.0" prefWidth="132.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson2" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="334.0" prefHeight="28.0" prefWidth="294.0" text="Максимальна швидкість -----------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson12" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="293.0" prefHeight="28.0" prefWidth="294.0" text="Колір -------------------------------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="color" alignment="TOP_LEFT" layoutX="328.0" layoutY="293.0" prefHeight="28.0" prefWidth="132.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="maxSpeed" alignment="TOP_LEFT" layoutX="328.0" layoutY="334.0" prefHeight="28.0" prefWidth="132.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson3" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="414.0" prefHeight="28.0" prefWidth="294.0" text="Тип приводу -----------------------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson11" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="373.0" prefHeight="28.0" prefWidth="294.0" text="Коробка передач ------------------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="transmission" alignment="TOP_LEFT" layoutX="328.0" layoutY="373.0" prefHeight="28.0" prefWidth="132.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="driveType" alignment="TOP_LEFT" layoutX="328.0" layoutY="414.0" prefHeight="28.0" prefWidth="132.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson4" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="497.0" prefHeight="28.0" prefWidth="294.0" text="Тип двигуна ------------------------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson13" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="456.0" prefHeight="28.0" prefWidth="294.0" text="Тип пального -----------------------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="fuelType" alignment="TOP_LEFT" layoutX="328.0" layoutY="456.0" prefHeight="28.0" prefWidth="132.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="engineType" alignment="TOP_LEFT" layoutX="328.0" layoutY="497.0" prefHeight="28.0" prefWidth="132.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson5" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="575.0" prefHeight="28.0" prefWidth="294.0" text="Витрати пального 100/км ----------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson14" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="534.0" prefHeight="28.0" prefWidth="294.0" text="Об'єм двигуна ----------------------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="engineCapacity" alignment="TOP_LEFT" layoutX="328.0" layoutY="534.0" prefHeight="28.0" prefWidth="132.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="fuelConsumptionFor100km" alignment="TOP_LEFT" layoutX="328.0" layoutY="575.0" prefHeight="28.0" prefWidth="132.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelInfo1" alignment="CENTER" layoutX="217.0" layoutY="94.0" prefHeight="66.0" prefWidth="461.0" text="Інформація про авто" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font name="Segoe UI Light" size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson6" alignment="CENTER" contentDisplay="CENTER" layoutX="438.0" layoutY="458.0" prefHeight="28.0" prefWidth="294.0" text="Типи комфорту --------------------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson15" alignment="CENTER" contentDisplay="CENTER" layoutX="448.0" layoutY="293.0" prefHeight="28.0" prefWidth="294.0" text="Типи безпеки ----------------------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="state" alignment="TOP_LEFT" layoutX="496.0" layoutY="251.0" prefHeight="28.0" prefWidth="294.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginPerson11111111" alignment="CENTER" contentDisplay="CENTER" layoutX="448.0" layoutY="212.0" prefHeight="28.0" prefWidth="294.0" text="Стан --------------------------------" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="securityTypes" alignment="TOP_LEFT" layoutX="496.0" layoutY="348.0" prefHeight="100.0" prefWidth="250.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="comfortTypes" alignment="TOP_LEFT" layoutX="492.0" layoutY="512.0" prefHeight="100.0" prefWidth="250.0" text="Info" textFill="#f1e9db" textOverrun="CLIP">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
