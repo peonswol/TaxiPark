@@ -38,9 +38,9 @@ public class LoginController {
         Connection connection = ConnectToDataBase.getConnection();
 
         String checkIsLogin = "select count(*)\n" +
-                "from \"admins\"\n" +
-                "where \"admins\".\"adminLogin\" = '"+admin+
-                "' and \"admins\".\"adminPassword\" = '"+passwordPerson.getText()+"'";
+                "from \"Admins\"\n" +
+                "where \"Admins\".\"AdminLogin\" = '"+admin+
+                "' and \"Admins\".\"AdminPassword\" = '"+passwordPerson.getText()+"'";
 
 
         try {

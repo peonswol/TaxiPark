@@ -43,9 +43,9 @@ public class MainMenuController {
 
     public void displayLoginAndPosition(String login){
 
-        String returnPosition = "select \"admins\".\"adminPosition\"\n" +
-                "from \"admins\"\n" +
-                "where \"admins\".\"adminLogin\" = '"+ login +"'";
+        String returnPosition = "select \"Admins\".\"AdminPosition\"\n" +
+                "from \"Admins\"\n" +
+                "where \"Admins\".\"AdminLogin\" = '"+ login +"'";
 
         try {
             Statement statement = connection.createStatement();
@@ -65,12 +65,11 @@ public class MainMenuController {
     //todo try
     public void onAddNewCarClick(ActionEvent event){
         try {
-            openNewScene(event, "fhf.fxml");
+            openNewScene(event, "addNewCar.fxml");
         }
         catch (IllegalStateException exception){
             exception.printStackTrace();
         }
-
     }
 
     public void onShowCostCarsClick(ActionEvent event){

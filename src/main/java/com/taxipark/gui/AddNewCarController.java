@@ -42,14 +42,12 @@ public class AddNewCarController implements Initializable {
     @FXML
     TextField engineTypeCar;
 
-
     @FXML
     TextField stateCar;
 
 
     @FXML
     TextArea securityTypesCar;
-
 
     @FXML
     TextArea comfortTypesCar;
@@ -70,16 +68,15 @@ public class AddNewCarController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fuelTypeCar.getItems().addAll("А-98", "А-98", "А-95 Energy", "А-95", "А-92 Energy", "ДТ Energy", "ГАЗ");
+        fuelTypeCar.getItems().addAll("А-100", "А-98", "А-95 Energy", "А-95", "А-92 Energy", "ДТ Energy", "ГАЗ");
         yearManufactureCar.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1970, 2022));
-        engineCapacityCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 3));
-        fuelConsumptionFor100kmCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1970, 2022));
+        engineCapacityCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 3, 1, 0.1));
+        fuelConsumptionFor100kmCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 20, 1, 0.1));
 
     }
 
     private boolean allDataIsNotEmpty(){
         return !markAndModelCar.getText().isEmpty()
-                && yearManufactureCar.getValue() != 0
                 && !costCar.getText().isEmpty()
                 && !colorCar.getText().isEmpty()
                 && !maxSpeedCar.getText().isEmpty()
@@ -87,8 +84,6 @@ public class AddNewCarController implements Initializable {
                 && !driveTypeCar.getText().isEmpty()
                 && fuelTypeCar.getValue() != null
                 && !engineTypeCar.getText().isEmpty()
-                && engineCapacityCar.getValue() != 0
-                && fuelConsumptionFor100kmCar.getValue() != 0
                 && !stateCar.getText().isEmpty()
                 && !securityTypesCar.getText().isEmpty()
                 && !comfortTypesCar.getText().isEmpty();
@@ -106,7 +101,7 @@ public class AddNewCarController implements Initializable {
         else {
             //todo check writing
             addDataInDataBase();
-            labelInfo.setText("Користувача успішно додано");
+            labelInfo.setText("Авто успішно додано");
         }
     }
 
@@ -122,7 +117,7 @@ public class AddNewCarController implements Initializable {
 
     private boolean insertGeneral(){
 
-        String insertGeneral = "insert into \"GeneralInfoTable\"(" +
+        String insertGeneral = "insert into \"GeneralInfoTable\" (" +
                 "                \"MarkAndModel\", " +
                 "                \"YearManufacture\", " +
                 "                \"Cost\", " +
@@ -133,10 +128,10 @@ public class AddNewCarController implements Initializable {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insertGeneral);
             preparedStatement.setString(1, markAndModelCar.getText());
-            preparedStatement.setString(2, yearManufactureCar.getValue().toString());
-            preparedStatement.setString(3, costCar.getText());
+            preparedStatement.setShort(2, yearManufactureCar.getValue().byteValue());
+            preparedStatement.setDouble(3, Double.parseDouble(costCar.getText()));
             preparedStatement.setString(4, colorCar.getText());
-            preparedStatement.setString(5, maxSpeedCar.getText());
+            preparedStatement.setDouble(5, Double.parseDouble(maxSpeedCar.getText()));
             preparedStatement.executeUpdate();
 
             return true;
@@ -182,8 +177,8 @@ public class AddNewCarController implements Initializable {
             PreparedStatement preparedStatement = connection.prepareStatement(insertFuel);
             preparedStatement.setString(1, fuelTypeCar.getValue());
             preparedStatement.setString(2, engineTypeCar.getText());
-            preparedStatement.setString(3, engineCapacityCar.getValue().toString());
-            preparedStatement.setString(4, fuelConsumptionFor100kmCar.getValue().toString());
+            preparedStatement.setDouble(3, engineCapacityCar.getValue());
+            preparedStatement.setDouble(4, fuelConsumptionFor100kmCar.getValue());
             preparedStatement.executeUpdate();
 
             return true;
@@ -218,7 +213,7 @@ public class AddNewCarController implements Initializable {
     }
 
 
-    private String getGeneralInfoID() {
+    private int getGeneralInfoID() {
 
         Connection connection = ConnectToDataBase.getConnection();
 
@@ -228,13 +223,18 @@ public class AddNewCarController implements Initializable {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(checkIsLogin);
-            return resultQuery.getString(1);
+            while (resultQuery.next()) {
+                return resultQuery.getInt(1);
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        return 0;
     }
 
-    private String getTechnicInfoID(){
+    private int getTechnicInfoID(){
         Connection connection = ConnectToDataBase.getConnection();
 
         String checkIsLogin = "select max(\"TechnicInfoID\")\n" +
@@ -243,13 +243,16 @@ public class AddNewCarController implements Initializable {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(checkIsLogin);
-            return resultQuery.getString(1);
+            while (resultQuery.next()) {
+                return resultQuery.getInt(1);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return 0;
     }
 
-    private String getFuelInfoID(){
+    private int getFuelInfoID(){
         Connection connection = ConnectToDataBase.getConnection();
 
         String checkIsLogin = "select max(\"FuelInfoID\")\n" +
@@ -258,13 +261,16 @@ public class AddNewCarController implements Initializable {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(checkIsLogin);
-            return resultQuery.getString(1);
+            while (resultQuery.next()) {
+                return resultQuery.getInt(1);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return 0;
     }
 
-    private String getMoreInformationID(){
+    private int getMoreInformationID(){
         Connection connection = ConnectToDataBase.getConnection();
 
         String checkIsLogin = "select max(\"MoreInformationID\")\n" +
@@ -273,10 +279,13 @@ public class AddNewCarController implements Initializable {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(checkIsLogin);
-            return resultQuery.getString(1);
+            while (resultQuery.next()) {
+                return resultQuery.getInt(1);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return 0;
     }
 
     private boolean insertCar(){
@@ -288,17 +297,17 @@ public class AddNewCarController implements Initializable {
                 "                \"MoreInformationID\" " +
                 "        ) values(?,?,?,?)";
 
-        String generalInfoID = getGeneralInfoID();
-        String technicInfoID = getTechnicInfoID();
-        String fuelInfoID = getFuelInfoID();
-        String moreInformationID = getMoreInformationID();
+        int generalInfoID = getGeneralInfoID();
+        int technicInfoID = getTechnicInfoID();
+        int fuelInfoID = getFuelInfoID();
+        int moreInformationID = getMoreInformationID();
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insertCar);
-            preparedStatement.setString(1, generalInfoID);
-            preparedStatement.setString(2, technicInfoID);
-            preparedStatement.setString(3, fuelInfoID);
-            preparedStatement.setString(4, moreInformationID);
+            preparedStatement.setInt(1, generalInfoID);
+            preparedStatement.setInt(2, technicInfoID);
+            preparedStatement.setInt(3, fuelInfoID);
+            preparedStatement.setInt(4, moreInformationID);
             preparedStatement.executeUpdate();
 
             return true;

@@ -86,16 +86,16 @@ public class AddNewAdminController implements Initializable {
     }
 
     private boolean addDataInDataBase() {
-        String inserting = "insert into admins(" +
-                "                \"adminLogin\", " +
-                "                \"adminFirstName\", " +
-                "                \"adminLastName\", " +
-                "                \"adminMiddleName\", " +
-                "                \"adminPosition\", " +
-                "                \"adminGender\", " +
-                "                \"adminDateBirth\", " +
-                "                \"adminDateEmployment\", " +
-                "                \"adminPassword\" " +
+        String inserting = "insert into \"Admins\"(" +
+                "                \"AdminLogin\", " +
+                "                \"AdminFirstName\", " +
+                "                \"AdminLastName\", " +
+                "                \"AdminMiddleName\", " +
+                "                \"AdminPosition\", " +
+                "                \"AdminGender\", " +
+                "                \"AdminDateBirth\", " +
+                "                \"AdminDateEmployment\", " +
+                "                \"AdminPassword\" " +
                 "        ) values(?,?,?,?,?,?,?,?,?)";
 
         try {
@@ -107,13 +107,12 @@ public class AddNewAdminController implements Initializable {
             preparedStatement.setString(5, position.getText());
             preparedStatement.setString(6, String.valueOf(gender.getValue().charAt(0)));
 
-            LocalDate localDate = dateBirth.getValue();
-            String date = localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            preparedStatement.setString(7, date);
+            Date date = Date.valueOf(dateBirth.getValue());
 
-            localDate = dateEmployment.getValue();
-            date = localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            preparedStatement.setString(8, date);
+            preparedStatement.setDate(7, date);
+
+            date = Date.valueOf(dateEmployment.getValue());
+            preparedStatement.setDate(8, date);
 
             preparedStatement.setString(9, password.getText());
 
