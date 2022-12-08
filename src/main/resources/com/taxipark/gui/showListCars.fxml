@@ -1,17 +1,157 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.ShowListCarsController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wall" stylesheets="@designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.ShowListCarsController">
    <children>
-      <TableView layoutX="173.0" layoutY="85.0" prefHeight="200.0" prefWidth="200.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6c9ef6" height="541.0" layoutY="99.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="759.0" />
+      <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="39.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../content/taxi.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7a434" height="647.0" layoutX="757.0" layoutY="-6.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" styleClass="yellowRectangle" width="379.0" />
+      <Label alignment="CENTER" layoutX="773.0" layoutY="-6.0" prefHeight="147.0" prefWidth="338.0" text="Відфільтрувати дані?" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font name="Segoe UI Light" size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="callMenu" layoutX="491.0" layoutY="30.0" mnemonicParsing="false" onAction="#onCallMenuClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Меню" textFill="#eef1f5">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="103.0" layoutY="34.0" prefHeight="25.0" prefWidth="250.0" text="PEONSWOLY TAXI" textFill="WHITE">
+         <font>
+            <Font name="Bauhaus 93" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelListLimit" alignment="CENTER" contentDisplay="CENTER" layoutX="764.0" layoutY="330.0" prefHeight="28.0" prefWidth="379.0" text="Введіть обмеження :" textFill="#f1e9db" textOverrun="CLIP" visible="false">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelStartLimit" alignment="CENTER" layoutX="764.0" layoutY="329.0" prefHeight="28.0" prefWidth="205.0" text="Початок обмеження :" textFill="#f1e9db" visible="false">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutX="6.0" layoutY="213.0" prefHeight="421.0" prefWidth="745.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="id" prefWidth="64.0" text="ID" />
+          <TableColumn fx:id="vin" prefWidth="102.0" text="VIN" />
+            <TableColumn fx:id="markAndModel" prefWidth="136.0" text="Марка і модель" />
+            <TableColumn fx:id="yearManufacture" minWidth="9.0" prefWidth="78.0" text="Рік збірки" />
+            <TableColumn fx:id="cost" minWidth="0.0" prefWidth="68.0" text="Вартість" />
+            <TableColumn fx:id="color" minWidth="7.0" prefWidth="67.0" text="Колір" />
+            <TableColumn fx:id="maxSpeed" prefWidth="109.0" text="Макс. швидкість" />
+            <TableColumn fx:id="fuelType" minWidth="0.0" prefWidth="89.0" text="Тип пального" />
+            <TableColumn fx:id="fuelConsumptionFor100km" prefWidth="179.0" text="Витрати пального за 100 км" />
         </columns>
       </TableView>
+      <Button fx:id="addFilter" layoutX="847.0" layoutY="520.0" mnemonicParsing="false" onAction="#onAddFilterClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnYellowWall" text="Додати фільтр" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+      </Button>
+      <Label fx:id="labelEndLimit" alignment="CENTER" layoutX="764.0" layoutY="398.0" prefHeight="28.0" prefWidth="205.0" text="Кінець обмеження :" textFill="#f1e9db" visible="false">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="startLimit" layoutX="977.0" layoutY="330.0" prefHeight="27.0" prefWidth="140.0" styleClass="TextAndPasswordFieldForEnterInYellowWall" visible="false" />
+      <TextField fx:id="endLimit" layoutX="977.0" layoutY="399.0" prefHeight="27.0" prefWidth="140.0" styleClass="TextAndPasswordFieldForEnterInYellowWall" visible="false" />
+      <TextField fx:id="listLimit" layoutX="775.0" layoutY="387.0" prefHeight="27.0" prefWidth="348.0" promptText="напр: чорний білий синій" styleClass="TextAndPasswordFieldForEnterInYellowWall" visible="false" />
+      <CheckBox fx:id="vinCheckBox" layoutX="801.0" layoutY="257.0" mnemonicParsing="false" onAction="#onCheckBox" text="VIN" textFill="#f1e9db">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="markAndModelCheckBox" layoutX="801.0" layoutY="303.0" mnemonicParsing="false" onAction="#onCheckBox" stylesheets="@designProject.css" text="Марка / Модель" textFill="#f1e9db">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="yearManufactureCheckBox" layoutX="801.0" layoutY="350.0" mnemonicParsing="false" onAction="#onCheckBox" text="Рік збірки" textFill="#f1e9db">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="costCheckBox" layoutX="964.0" layoutY="350.0" mnemonicParsing="false" onAction="#onCheckBox" text="Вартість" textFill="#f1e9db">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="colorCheckBox" layoutX="964.0" layoutY="303.0" mnemonicParsing="false" onAction="#onCheckBox" text="Колір" textFill="#f1e9db">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="maxSpeedCheckBox" layoutX="964.0" layoutY="395.0" mnemonicParsing="false" onAction="#onCheckBox" text="Макс. швидкість" textFill="#f1e9db">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="idCheckBox" allowIndeterminate="true" layoutX="964.0" layoutY="257.0" mnemonicParsing="false" onAction="#onCheckBox" text="ID" textFill="#f1e9db">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </CheckBox>
+      <Button fx:id="clearFilter" layoutX="844.0" layoutY="529.0" mnemonicParsing="false" onAction="#onClearFilterClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnYellowWall" text="Очистити фільтри" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+      </Button>
+      <CheckBox fx:id="fuelTypeCheckBox" layoutX="801.0" layoutY="395.0" mnemonicParsing="false" onAction="#onCheckBox" text="Тип пального" textFill="#f1e9db">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="fuelConsumptionFor100kmCheckBox" layoutX="801.0" layoutY="436.0" mnemonicParsing="false" onAction="#onCheckBox" prefHeight="23.0" prefWidth="266.0" text="Витрата пального за 100 км" textFill="#f1e9db">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </CheckBox>
+      <Label fx:id="selectedCheck" alignment="CENTER" layoutX="764.0" layoutY="236.0" prefHeight="17.0" prefWidth="371.0" text="Обраний фільтр :" textFill="#f1e9db" visible="false">
+         <font>
+            <Font name="Segoe UI Light" size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="keyWordField" disable="true" layoutX="134.0" layoutY="143.0" prefHeight="25.0" prefWidth="499.0" />
+      <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="56.0" layoutY="132.0" onMouseClicked="#onWorkWithSearchingClick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../content/magnifying-glass.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="77.0" layoutX="904.0" layoutY="142.0" onMouseClicked="#onStartFilterClick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../content/filter.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="infoToStop" layoutX="861.0" layoutY="105.0" text="Зупиніть спочатку пошук..." textFill="#1e3e74" visible="false">
+         <font>
+            <Font name="Segoe UI Light" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="arrowToStop" fitHeight="108.0" fitWidth="124.0" layoutX="719.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" rotate="38.7" visible="false">
+         <image>
+            <Image url="@../content/curved-arrow-with-broken-line.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="stopSearch" layoutX="660.0" layoutY="140.0" mnemonicParsing="false" onAction="#onStopSearchClick" prefHeight="29.0" prefWidth="35.0" style="-fx-background-color: red; -fx-pref-width: 36; -fx-pref-height: 29;" styleClass="buttonOnYellowWall" text="Х" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

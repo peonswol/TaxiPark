@@ -58,3 +58,30 @@
 .blueRectangle{
     -fx-fill: #9784dc;
 }
+
+.check-box{
+    -fx-fill: #f1e9db;
+    -fx-font-family: Segoe UI Light;
+}
+
+
+.check-box:disabled .box {
+    -fx-background-color: #6c9ef6;
+}
+
+.check-box .box {
+    -fx-border-radius:3px;
+    -fx-border-color:#eef1f5;
+    -fx-background-color: #eef1f5;
+}
+
+.check-box:selected .mark {
+
+    -fx-background-color: white;
+
+}
+
+.check-box:selected .box {
+
+    -fx-background-color: #28a3f4;
+}

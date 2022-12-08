@@ -1,8 +1,12 @@
 package com.taxipark.gui.component;
 
+import javafx.collections.ObservableArray;
+
 public class Car {
 
     private int carID;
+
+    private String carVIN;
 
     private String markAndModel;
     private int yearManufacture;
@@ -141,6 +145,15 @@ public class Car {
     public void setComfortTypes(String comfortTypes) {
         this.comfortTypes = comfortTypes;
     }
+
+    public String getCarVIN() {
+        return carVIN;
+    }
+
+    public void setCarVIN(String carVIN) {
+        this.carVIN = carVIN;
+    }
+
 }
 
 

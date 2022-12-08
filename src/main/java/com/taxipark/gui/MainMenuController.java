@@ -81,14 +81,14 @@ public class MainMenuController {
     }
 
     public void onShowListCarsClick(ActionEvent event){
-        openNewScene(event, "showCostCars.fxml");
+        openNewScene(event, "showListCars.fxml");
     }
 
     public void onAddNewAdminClick(ActionEvent event){
         openNewScene(event, "addNewAdmin.fxml");
     }
 
-    private void openNewScene(ActionEvent event, String newScene){
+    public void openNewScene(ActionEvent event, String newScene){
         FXMLLoader loader = new FXMLLoader(getClass().getResource(newScene));
         try {
             Parent root = loader.load();
@@ -101,5 +101,7 @@ public class MainMenuController {
             throw new RuntimeException(e);
         }
     }
+
+
 
 }
