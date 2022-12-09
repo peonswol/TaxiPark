@@ -200,6 +200,7 @@ public class ShowListCarsController implements Initializable {
 
         isSearching = true;
 
+        turnOnDisable(true);
         keyWordField.setDisable(false);
 
         FilteredList<Car> filteredData = new FilteredList<>(table.getItems(), b -> true);

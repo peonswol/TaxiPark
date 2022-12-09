@@ -73,7 +73,7 @@ public class MainMenuController {
     }
 
     public void onShowCostCarsClick(ActionEvent event){
-        openNewScene(event, "showCostCars.fxml");
+        openNewScene(event, "searchCarByID.fxml");
     }
 
     public void onSearchCarByIDClick(ActionEvent event){
