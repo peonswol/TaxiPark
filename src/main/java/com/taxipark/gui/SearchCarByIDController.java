@@ -2,6 +2,7 @@ package com.taxipark.gui;
 
 import com.taxipark.gui.component.Car;
 import com.taxipark.gui.component.ConnectToDataBase;
+import com.taxipark.gui.component.DeleteCar;
 import com.taxipark.gui.component.EditCarData;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -61,6 +62,9 @@ public class SearchCarByIDController implements Initializable {
     private Label labelInfo;
 
     @FXML
+    private Label messageLabelMain;
+
+    @FXML
     private TextField enteringData;
 
     @FXML
@@ -76,8 +80,7 @@ public class SearchCarByIDController implements Initializable {
     ChoiceBox<String> enteringFuelTypeCar;
 
     @FXML
-    Label messegeLabel;
-
+    Label messageLabel;
 
     private List<Car> cars;
 
@@ -280,8 +283,8 @@ public class SearchCarByIDController implements Initializable {
         boolean isSelected = true;
 
         if(selectListCharacteristic.getValue() == null){
-            messegeLabel.setText("Виберіть характеристику для редагування!!");
-            messegeLabel.setVisible(true);
+            messageLabel.setText("Виберіть характеристику для редагування!!");
+            messageLabel.setVisible(true);
             isSelected = false;
         } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(3))) {
             enteringYearManufactureCar.setVisible(true);
@@ -296,7 +299,7 @@ public class SearchCarByIDController implements Initializable {
         }
 
         if(isSelected) {
-            messegeLabel.setText("Введіть нові дані:");
+            messageLabel.setText("Введіть нові дані:");
             chooseCharacteristicButton.setDisable(true);
             turnOnVisibleButtonAndChoiceListOnChangingDataScene(true);
             selectListCharacteristic.setDisable(true);
@@ -316,11 +319,14 @@ public class SearchCarByIDController implements Initializable {
     public void onDeleteCarButtonClick(ActionEvent event){
         try {
 
-            //todo delete
-
+            DeleteCar deleteCar = new DeleteCar();
+            deleteCar.execute(carSelectedByID);
 
             MainMenuController mainMenuController = new MainMenuController();
             mainMenuController.openNewScene(event, "searchCarByID.fxml");
+
+            //todo
+            messageLabelMain.setText("Авто успішно видалено!");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -349,7 +355,7 @@ public class SearchCarByIDController implements Initializable {
             boolean isSaved = true;
 
             if(selectListCharacteristic.getValue() == null){
-                messegeLabel.setText("Введіть дані для збереження!!");
+                messageLabel.setText("Введіть дані для збереження!!");
                 isSaved = false;
             }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(1))){
                 editCarData.updateDataOfCar(carSelectedByID, enteringData.getText());
@@ -439,7 +445,7 @@ public class SearchCarByIDController implements Initializable {
 
         goBackButton.setVisible(bool);
         saveChangeButton.setVisible(bool);
-        messegeLabel.setVisible(bool);
+        messageLabel.setVisible(bool);
     }
 
     private void turnOffAllEnteringField(){

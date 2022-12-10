@@ -8,24 +8,6 @@ public class EditCarData {
 
     private PreparedStatement preparedStatement;
 
-    public void updateDataOfCar(Car car, String newData){
-        int id = car.getCarID();
-        String sql = "update \"CarTable\"\n" +
-                "set \"CarVIN\" = ?"+
-                "where \"CarID\" = ?";
-
-        try{
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, newData);
-            preparedStatement.setInt(2, car.getCarID());
-
-            preparedStatement.execute();
-
-        }catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private int getGeneralInfoID(Car car){
         String getID = "select \"GeneralInfoID\"\n" +
                 "from \"CarTable\"\n" +
@@ -92,6 +74,24 @@ public class EditCarData {
             throw new RuntimeException(e);
         }
         return 0;
+    }
+
+    public void updateDataOfCar(Car car, String newData){
+        int id = car.getCarID();
+        String sql = "update \"CarTable\"\n" +
+                "set \"CarVIN\" = ?"+
+                "where \"CarID\" = ?";
+
+        try{
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, newData);
+            preparedStatement.setInt(2, car.getCarID());
+
+            preparedStatement.execute();
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void updateDataOfGeneralInfo(Car car , String nameCharacteristic, String newData){

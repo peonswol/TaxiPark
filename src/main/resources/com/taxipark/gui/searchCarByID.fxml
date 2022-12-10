@@ -79,7 +79,7 @@
       </Button>
       <ChoiceBox fx:id="selectListCharacteristic" layoutX="888.0" layoutY="209.0" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #A2BDF5;" visible="false" />
       <TextField fx:id="enteringData" layoutX="888.0" layoutY="367.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInYellowWall" visible="false" />
-      <Label fx:id="messegeLabel" alignment="CENTER" layoutX="825.0" layoutY="320.0" prefHeight="25.0" prefWidth="307.0" text="Введіть нові дані:" textFill="#f1e9db" visible="false">
+      <Label fx:id="messageLabel" alignment="CENTER" layoutX="825.0" layoutY="320.0" prefHeight="25.0" prefWidth="307.0" text="Введіть нові дані:" textFill="#f1e9db" visible="false">
          <font>
             <Font name="Segoe UI Light" size="16.0" />
          </font>
