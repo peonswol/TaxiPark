@@ -510,7 +510,4 @@ public class SearchCarByIDController implements Initializable {
         enteringFuelConsumptionFor100kmCar.setVisible(false);
     }
 
-    private void clearAndDisableEnteringFields(){
-
-    }
 }

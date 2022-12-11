@@ -121,6 +121,7 @@ public class AddNewCarController implements Initializable {
                     setMessage("Авто успішно додано)");
                     saveDataButton.setVisible(false);
                     addAnotherCarButton.setVisible(true);
+                    clearAndDisableAllEntering();
                 }else {
                     setMessage("Виникла помилка запису авто!");
                 }
@@ -178,7 +179,7 @@ public class AddNewCarController implements Initializable {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insertGeneral);
             preparedStatement.setString(1, markAndModelCar.getText());
-            preparedStatement.setShort(2, yearManufactureCar.getValue().byteValue());
+            preparedStatement.setInt(2, yearManufactureCar.getValue());
             preparedStatement.setDouble(3, Double.parseDouble(costCar.getText()));
             preparedStatement.setString(4, colorCar.getText());
             preparedStatement.setDouble(5, Double.parseDouble(maxSpeedCar.getText()));
@@ -368,5 +369,40 @@ public class AddNewCarController implements Initializable {
             e.printStackTrace();
             return false;
         }
+    }
+
+    private void clearAndDisableAllEntering(){
+        carVIN.setDisable(true);
+        carVIN.clear();
+
+        markAndModelCar.setDisable(true);
+        markAndModelCar.clear();
+
+        costCar.setDisable(true);
+        costCar.clear();
+
+        colorCar.setDisable(true);
+        colorCar.clear();
+
+        maxSpeedCar.setDisable(true);
+        maxSpeedCar.clear();
+
+        transmissionCar.setDisable(true);
+        transmissionCar.clear();
+
+        driveTypeCar.setDisable(true);
+        driveTypeCar.clear();
+
+        driveTypeCar.setDisable(true);
+        driveTypeCar.clear();
+
+        stateCar.setDisable(true);
+        stateCar.clear();
+
+        securityTypesCar.setDisable(true);
+        securityTypesCar.clear();
+
+        comfortTypesCar.setDisable(true);
+        comfortTypesCar.clear();
     }
 }
