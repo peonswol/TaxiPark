@@ -1,7 +1,6 @@
 package com.taxipark.gui;
 
 import com.taxipark.gui.component.Car;
-import com.taxipark.gui.component.ConnectToDataBase;
 import com.taxipark.gui.component.FilteringByObject;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
@@ -14,21 +13,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ShowListCarsController implements Initializable {
 
     @FXML
-    private Button addFilter;
+    private Button addFilterButton;
 
     @FXML
-    private Button clearFilter;
+    private Button clearFilterButton;
 
     @FXML
     private Label labelListLimit;
@@ -125,318 +119,351 @@ public class ShowListCarsController implements Initializable {
 
     private boolean isSearching = false;
 
-    private List<Car> getCarsFromDB(){
-
-        Connection connection = ConnectToDataBase.getConnection();
-
-        String getCars =
-                """
-                        select car."CarID", car."CarVIN", "general"."MarkAndModel",
-                        "general"."YearManufacture", "general"."Cost", "general"."Color", 
-                        "general"."MaxSpeed", fuel."FuelType", fuel."FuelConsumptionFor100km"
-                        from "CarTable" as car
-                        inner join "GeneralInfoTable" as "general"
-                        on car."GeneralInfoID" = "general"."GeneralInfoID"
-                        inner join "FuelInfoTable" as fuel
-                        on car."FuelInfoID" = fuel."FuelInfoID\"""";
-
-        try {
-
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(getCars);
-            Car tempCar;
-            List<Car> cars = new ArrayList<>();
-
-            while (result.next()) {
-                tempCar = new Car();
-                tempCar.setCarID(result.getInt("CarID"));
-                tempCar.setCarVIN(result.getString("CarVIN"));
-                tempCar.setMarkAndModel(result.getString("MarkAndModel"));
-                tempCar.setYearManufacture(result.getInt("YearManufacture"));
-                tempCar.setCost(result.getDouble("Cost"));
-                tempCar.setColor(result.getString("Color"));
-                tempCar.setMaxSpeed(result.getDouble("MaxSpeed"));
-                tempCar.setFuelType(result.getString("FuelType"));
-                tempCar.setFuelConsumptionFor100km(result.getDouble("FuelConsumptionFor100km"));
-
-                cars.add(tempCar);
-            }
-
-            return cars;
-
-        }catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        initCheckBoxesArray();
+        try {
+            initCheckBoxesArray();
 
-        List<Car> cars = getCarsFromDB();
 
-        id.setCellValueFactory(new PropertyValueFactory<>("carID"));
-        vin.setCellValueFactory(new PropertyValueFactory<>("carVIN"));
-        markAndModel.setCellValueFactory(new PropertyValueFactory<>("markAndModel"));
-        yearManufacture.setCellValueFactory(new PropertyValueFactory<>("yearManufacture"));
-        cost.setCellValueFactory(new PropertyValueFactory<>("cost"));
-        color.setCellValueFactory(new PropertyValueFactory<>("color"));
-        maxSpeed.setCellValueFactory(new PropertyValueFactory<>("maxSpeed"));
-        fuelType.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
-        fuelConsumptionFor100km.setCellValueFactory(new PropertyValueFactory<>("fuelConsumptionFor100km"));
+            List<Car> cars = Car.getCarsFromDB();
 
-        table.setItems(FXCollections.observableArrayList(cars));
+            id.setCellValueFactory(new PropertyValueFactory<>("carID"));
+            vin.setCellValueFactory(new PropertyValueFactory<>("carVIN"));
+            markAndModel.setCellValueFactory(new PropertyValueFactory<>("markAndModel"));
+            yearManufacture.setCellValueFactory(new PropertyValueFactory<>("yearManufacture"));
+            cost.setCellValueFactory(new PropertyValueFactory<>("cost"));
+            color.setCellValueFactory(new PropertyValueFactory<>("color"));
+            maxSpeed.setCellValueFactory(new PropertyValueFactory<>("maxSpeed"));
+            fuelType.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
+            fuelConsumptionFor100km.setCellValueFactory(new PropertyValueFactory<>("fuelConsumptionFor100km"));
+
+            table.setItems(FXCollections.observableArrayList(cars));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void initCheckBoxesArray(){
-        checkBoxes = new CheckBox[]{idCheckBox, vinCheckBox, markAndModelCheckBox,
-                yearManufactureCheckBox, costCheckBox, colorCheckBox, maxSpeedCheckBox,
-                fuelTypeCheckBox, fuelConsumptionFor100kmCheckBox};
+    private void initCheckBoxesArray() {
+        try {
+            checkBoxes = new CheckBox[]{idCheckBox, vinCheckBox, markAndModelCheckBox,
+                    yearManufactureCheckBox, costCheckBox, colorCheckBox, maxSpeedCheckBox,
+                    fuelTypeCheckBox, fuelConsumptionFor100kmCheckBox};
 
-        turnOnDisable(true);
+            turnOnDisable(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void onWorkWithSearchingClick(){
+    public void onWorkWithSearchingClick() {
+        try {
+            isSearching = true;
 
-        isSearching = true;
+            turnOnDisable(true);
+            keyWordField.setDisable(false);
 
-        turnOnDisable(true);
-        keyWordField.setDisable(false);
+            FilteredList<Car> filteredData = new FilteredList<>(table.getItems(), b -> true);
 
-        FilteredList<Car> filteredData = new FilteredList<>(table.getItems(), b -> true);
+            keyWordField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(car -> {
 
-        keyWordField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(car -> {
+                if (newValue.isEmpty() || newValue.isBlank() || newValue.equals(" ")) {
+                    return true;
+                }
 
-            if (newValue.isEmpty() || newValue.isBlank() || newValue.equals(" ")){
-                return true;
+                String searchKeyWord = newValue.toLowerCase();
+
+                if (car.getMarkAndModel().toLowerCase().contains(searchKeyWord)) {
+                    return true;
+                } else if (car.getCarVIN().toLowerCase().contains(searchKeyWord)) {
+                    return true;
+                } else if (car.getColor().toLowerCase().contains(searchKeyWord)) {
+                    return true;
+                } else if (car.getFuelType().toLowerCase().contains(searchKeyWord)) {
+                    return true;
+                } else if (Integer.toString(car.getCarID()).contains(searchKeyWord)) {
+                    return true;
+                } else return Integer.toString(car.getYearManufacture()).toLowerCase().contains(searchKeyWord);
+            }));
+
+            SortedList<Car> sortedList = new SortedList<>(filteredData);
+
+            sortedList.comparatorProperty().bind(table.comparatorProperty());
+            table.setItems(sortedList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onStartFilterClick() {
+        try {
+            if (!isSearching) {
+                turnOnDisable(false);
+            } else {
+                infoToStop.setVisible(true);
+                arrowToStop.setVisible(true);
             }
-
-            String searchKeyWord = newValue.toLowerCase();
-
-            if (car.getMarkAndModel().toLowerCase().contains(searchKeyWord)){
-                return true;
-            }else if(car.getCarVIN().toLowerCase().contains(searchKeyWord)){
-                return true;
-            }else if(car.getColor().toLowerCase().contains(searchKeyWord)){
-                return true;
-            }else if(car.getFuelType().toLowerCase().contains(searchKeyWord)){
-                return true;
-            }else if(Integer.toString(car.getCarID()).contains(searchKeyWord)){
-                return true;
-            }else return Integer.toString(car.getYearManufacture()).toLowerCase().contains(searchKeyWord);
-        }));
-
-        SortedList<Car> sortedList = new SortedList<>(filteredData);
-
-        sortedList.comparatorProperty().bind(table.comparatorProperty());
-        table.setItems(sortedList);
-    }
-
-    public void onStartFilterClick(){
-        if (!isSearching) {
-            turnOnDisable(false);
-        }else {
-            infoToStop.setVisible(true);
-            arrowToStop.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public void onStopSearchClick(ActionEvent event){
-        isSearching = false;
-        onClearFilterClick(event);
-    }
-
-    public void turnOnDisable(boolean bool){
-        for (CheckBox checkBox:checkBoxes){
-            checkBox.setDisable(bool);
+    public void onStopSearchButtonClick(ActionEvent event) {
+        try {
+            isSearching = false;
+            onClearFilterButtonClick(event);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public void onCheckBox(ActionEvent event){
-        isInterval = checkElementsToFilter();
-        swapMenuToEnter(true);
+    public void turnOnDisable(boolean bool) {
+        try {
+            for (CheckBox checkBox : checkBoxes) {
+                checkBox.setDisable(bool);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private boolean checkElementsToFilter(){
+    public void onCheckBox(ActionEvent event) {
+        try {
+            isInterval = checkElementsToFilter();
+            swapMenuToEnter(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-        if (idCheckBox.isSelected()){
+    private boolean checkElementsToFilter() {
 
-            selectedCheck.setText("Обраний фільтр: ID");
-            return true;
+        try {
+            if (idCheckBox.isSelected()) {
 
-        }else if (yearManufactureCheckBox.isSelected()){
+                selectedCheck.setText("Обраний фільтр: ID");
+                return true;
 
-            selectedCheck.setText("Обраний фільтр: Рік збірки");
-            return true;
+            } else if (yearManufactureCheckBox.isSelected()) {
 
-        }else if (costCheckBox.isSelected()){
+                selectedCheck.setText("Обраний фільтр: Рік збірки");
+                return true;
 
-            selectedCheck.setText("Обраний фільтр: Вартість");
-            return true;
+            } else if (costCheckBox.isSelected()) {
 
-        }else if (maxSpeedCheckBox.isSelected()){
+                selectedCheck.setText("Обраний фільтр: Вартість");
+                return true;
 
-            selectedCheck.setText("Обраний фільтр: Максимальна швидкість");
-            return true;
+            } else if (maxSpeedCheckBox.isSelected()) {
 
-        }else if (fuelConsumptionFor100kmCheckBox.isSelected()){
+                selectedCheck.setText("Обраний фільтр: Максимальна швидкість");
+                return true;
 
-            selectedCheck.setText("Обраний фільтр: Витрата пального за 100 км");
-            return true;
+            } else if (fuelConsumptionFor100kmCheckBox.isSelected()) {
 
-        }else if (vinCheckBox.isSelected()){
+                selectedCheck.setText("Обраний фільтр: Витрата пального за 100 км");
+                return true;
 
-            listLimit.setPromptText("напр: ВВ 4177 СН , AH 4035 HX , AA 6126 ME");
-            selectedCheck.setText("Обраний фільтр: VIN");
-            return false;
+            } else if (vinCheckBox.isSelected()) {
 
-        }else if (markAndModelCheckBox.isSelected()){
+                listLimit.setPromptText("напр: ВВ 4177 СН , AH 4035 HX , AA 6126 ME");
+                selectedCheck.setText("Обраний фільтр: VIN");
+                return false;
 
-            listLimit.setPromptText("напр: Audi , Audi A7 , BMW");
-            selectedCheck.setText("Обраний фільтр: Марка і модель");
-            return false;
+            } else if (markAndModelCheckBox.isSelected()) {
 
-        }else if (colorCheckBox.isSelected()){
+                listLimit.setPromptText("напр: Audi , Audi A7 , BMW");
+                selectedCheck.setText("Обраний фільтр: Марка і модель");
+                return false;
 
-            listLimit.setPromptText("напр: чорний , білий , синій");
-            selectedCheck.setText("Обраний фільтр: Колір");
-            return false;
+            } else if (colorCheckBox.isSelected()) {
 
-        }else if (fuelTypeCheckBox.isSelected()) {
+                listLimit.setPromptText("напр: чорний , білий , синій");
+                selectedCheck.setText("Обраний фільтр: Колір");
+                return false;
 
-            listLimit.setPromptText("напр: А-95 , дизель , А-100");
-            selectedCheck.setText("Обраний фільтр: Тип пального");
-            return false;
+            } else if (fuelTypeCheckBox.isSelected()) {
 
+                listLimit.setPromptText("напр: А-95 , дизель , А-100");
+                selectedCheck.setText("Обраний фільтр: Тип пального");
+                return false;
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return false;
     }
 
-    private void turnOnLimitStartAndEnd(boolean bool){
-        labelStartLimit.setVisible(bool);
-        labelEndLimit.setVisible(bool);
-        startLimit.setVisible(bool);
-        endLimit.setVisible(bool);
-    }
-
-    private void turnOnLimitList(boolean bool){
-        labelListLimit.setVisible(bool);
-        listLimit.setVisible(bool);
-    }
-
-    private void turnOnCheckMenu(boolean bool){
-        idCheckBox.setVisible(bool);
-        vinCheckBox.setVisible(bool);
-        markAndModelCheckBox.setVisible(bool);
-        yearManufactureCheckBox.setVisible(bool);
-        costCheckBox.setVisible(bool);
-        colorCheckBox.setVisible(bool);
-        maxSpeedCheckBox.setVisible(bool);
-        fuelTypeCheckBox.setVisible(bool);
-        fuelConsumptionFor100kmCheckBox.setVisible(bool);
-    }
-
-    private void swapVisibleButtons(boolean bool){
-        addFilter.setVisible(bool);
-        clearFilter.setVisible(!bool);
-    }
-
-    public void onClearFilterClick(ActionEvent event){
-        MainMenuController mainMenuController = new MainMenuController();
-        mainMenuController.openNewScene(event, "showListCars.fxml");
-    }
-
-    public void onCallMenuClick(ActionEvent event){
-        LoginController loginController = new LoginController();
-        loginController.openMenu(event);
-    }
-
-    public void onAddFilterClick(ActionEvent event){
-
-        String[] limit = null;
-
-        if (!isInterval){
-            limit = listLimit.getText().split(" , ");
+    private void turnOnLimitStartAndEnd(boolean bool) {
+        try {
+            labelStartLimit.setVisible(bool);
+            labelEndLimit.setVisible(bool);
+            startLimit.setVisible(bool);
+            endLimit.setVisible(bool);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        doBySelectedCheckBox(limit);
-
-        transformCheckBox();
-        swapMenuToEnter(false);
-        clearEnter();
     }
 
-    private void clearEnter(){
-        listLimit.clear();
-        endLimit.clear();
-        startLimit.clear();
+    private void turnOnLimitList(boolean bool) {
+        try {
+            labelListLimit.setVisible(bool);
+            listLimit.setVisible(bool);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void transformCheckBox(){
+    private void turnOnCheckMenu(boolean bool) {
+        try {
+            idCheckBox.setVisible(bool);
+            vinCheckBox.setVisible(bool);
+            markAndModelCheckBox.setVisible(bool);
+            yearManufactureCheckBox.setVisible(bool);
+            costCheckBox.setVisible(bool);
+            colorCheckBox.setVisible(bool);
+            maxSpeedCheckBox.setVisible(bool);
+            fuelTypeCheckBox.setVisible(bool);
+            fuelConsumptionFor100kmCheckBox.setVisible(bool);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-        for (CheckBox checkBox : checkBoxes){
-            if (checkBox.isSelected()){
-                checkBox.setDisable(true);
-                checkBox.setSelected(false);
+    private void swapVisibleButtons(boolean bool) {
+        try {
+            addFilterButton.setVisible(bool);
+            clearFilterButton.setVisible(!bool);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onClearFilterButtonClick(ActionEvent event) {
+        try {
+            MainMenuController mainMenuController = new MainMenuController();
+            mainMenuController.openNewScene(event, "showListCars.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onCallMenuButtonClick(ActionEvent event) {
+        try {
+            LoginController loginController = new LoginController();
+            loginController.openMenu(event);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onAddFilterButtonClick(ActionEvent event) {
+
+        try {
+            String[] limit = null;
+
+            if (!isInterval) {
+                limit = listLimit.getText().split(" , ");
             }
+            doBySelectedCheckBox(limit);
+
+            transformCheckBox();
+            swapMenuToEnter(false);
+            clearEnter();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void clearEnter() {
+        try {
+            listLimit.clear();
+            endLimit.clear();
+            startLimit.clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void transformCheckBox() {
+
+        try {
+            for (CheckBox checkBox : checkBoxes) {
+                if (checkBox.isSelected()) {
+                    checkBox.setDisable(true);
+                    checkBox.setSelected(false);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
 
-    private void doBySelectedCheckBox(String[] limit){
+    private void doBySelectedCheckBox(String[] limit) {
 
         FilteringByObject filteringByObject = new FilteringByObject();
 
-        if (idCheckBox.isSelected()) {
+        try {
+            if (idCheckBox.isSelected()) {
 
-            filteringByObject.filterByID(startLimit.getText(), endLimit.getText(), table.getItems());
+                filteringByObject.filterByID(startLimit.getText(), endLimit.getText(), table.getItems());
 
-        } else if (yearManufactureCheckBox.isSelected()) {
+            } else if (yearManufactureCheckBox.isSelected()) {
 
-            filteringByObject.filterByYearManufacture(startLimit.getText(), endLimit.getText(), table.getItems());
+                filteringByObject.filterByYearManufacture(startLimit.getText(), endLimit.getText(), table.getItems());
 
-        } else if (costCheckBox.isSelected()) {
+            } else if (costCheckBox.isSelected()) {
 
-            filteringByObject.filterByCost(startLimit.getText(), endLimit.getText(), table.getItems());
+                filteringByObject.filterByCost(startLimit.getText(), endLimit.getText(), table.getItems());
 
-        } else if (maxSpeedCheckBox.isSelected()) {
+            } else if (maxSpeedCheckBox.isSelected()) {
 
-            filteringByObject.filterByMaxSpeed(startLimit.getText(), endLimit.getText(), table.getItems());
+                filteringByObject.filterByMaxSpeed(startLimit.getText(), endLimit.getText(), table.getItems());
 
-        } else if (fuelConsumptionFor100kmCheckBox.isSelected()) {
+            } else if (fuelConsumptionFor100kmCheckBox.isSelected()) {
 
-            filteringByObject.filterByFuelConsumptionFor100km(startLimit.getText(), endLimit.getText(), table.getItems());
+                filteringByObject.filterByFuelConsumptionFor100km(startLimit.getText(), endLimit.getText(), table.getItems());
 
-        } else if (vinCheckBox.isSelected()) {
+            } else if (vinCheckBox.isSelected()) {
 
-            filteringByObject.filterByVIN(limit, table.getItems());
+                filteringByObject.filterByVIN(limit, table.getItems());
 
-        } else if (markAndModelCheckBox.isSelected()) {
+            } else if (markAndModelCheckBox.isSelected()) {
 
-            filteringByObject.filterByMarkAndModel(limit, table.getItems());
+                filteringByObject.filterByMarkAndModel(limit, table.getItems());
 
-        } else if (colorCheckBox.isSelected()) {
+            } else if (colorCheckBox.isSelected()) {
 
-            filteringByObject.filterByColor(limit, table.getItems());
+                filteringByObject.filterByColor(limit, table.getItems());
 
-        } else if (fuelTypeCheckBox.isSelected()) {
+            } else if (fuelTypeCheckBox.isSelected()) {
 
-            filteringByObject.filterByFuelType(limit, table.getItems());
+                filteringByObject.filterByFuelType(limit, table.getItems());
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private void swapMenuToEnter(boolean bool){
-        turnOnCheckMenu(!bool);
-        selectedCheck.setVisible(bool);
+    private void swapMenuToEnter(boolean bool) {
 
-        if (isInterval){
-            turnOnLimitStartAndEnd(bool);
+        try {
+            turnOnCheckMenu(!bool);
+            selectedCheck.setVisible(bool);
 
-        } else {
-            turnOnLimitList(bool);
+            if (isInterval) {
+                turnOnLimitStartAndEnd(bool);
+
+            } else {
+                turnOnLimitList(bool);
+            }
+            swapVisibleButtons(bool);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        swapVisibleButtons(bool);
     }
-
 }

@@ -30,7 +30,7 @@
             <String fx:value="yellowRectangle" />
             <String fx:value="buttonOnYellowWall" />
          </styleClass></Rectangle>
-      <Button fx:id="callMenu" layoutX="610.0" layoutY="30.0" mnemonicParsing="false" onAction="#onCallMenuButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Меню" textFill="#eef1f5">
+      <Button fx:id="callMenuButton" layoutX="593.0" layoutY="30.0" mnemonicParsing="false" onAction="#onCallMenuButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Меню" textFill="#eef1f5">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>

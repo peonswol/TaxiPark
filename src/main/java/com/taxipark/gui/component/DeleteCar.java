@@ -3,7 +3,7 @@ package com.taxipark.gui.component;
 import java.sql.*;
 
 public class DeleteCar {
-    private Connection connection = ConnectToDataBase.getConnection();
+    private final Connection connection = ConnectToDataBase.getConnection();
 
     private PreparedStatement preparedStatement;
 
@@ -17,7 +17,7 @@ public class DeleteCar {
 
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(getID);
-            while (resultQuery.next()) {
+            if (resultQuery.next()) {
                 return resultQuery.getInt(1);
             }
         } catch (SQLException e) {
@@ -34,7 +34,7 @@ public class DeleteCar {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(getID);
-            while (resultQuery.next()) {
+            if (resultQuery.next()) {
                 return resultQuery.getInt(1);
             }
         } catch (SQLException e) {
@@ -51,7 +51,7 @@ public class DeleteCar {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(getID);
-            while (resultQuery.next()) {
+            if (resultQuery.next()) {
                 return resultQuery.getInt(1);
             }
         } catch (SQLException e) {
@@ -68,7 +68,7 @@ public class DeleteCar {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(getID);
-            while (resultQuery.next()) {
+            if (resultQuery.next()) {
                 return resultQuery.getInt(1);
             }
         } catch (SQLException e) {

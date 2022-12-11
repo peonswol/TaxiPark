@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -17,21 +16,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class MainMenuController {
-
-    @FXML
-    Button addNewCar;
-
-    @FXML
-    Button showListCars;
-
-    @FXML
-    Button searchCarByID;
-
-    @FXML
-    Button addNewAdmin;
-
-    @FXML
-    Button showCostCars;
 
     @FXML
     Label loginPerson;
@@ -63,29 +47,45 @@ public class MainMenuController {
     }
 
     //todo try
-    public void onAddNewCarClick(ActionEvent event){
+    public void onAddNewCarButtonClick(ActionEvent event){
         try {
             openNewScene(event, "addNewCar.fxml");
         }
-        catch (IllegalStateException exception){
+        catch (Exception exception){
             exception.printStackTrace();
         }
     }
 
-    public void onShowCostCarsClick(ActionEvent event){
-        openNewScene(event, "searchCarByID.fxml");
+    public void onShowCostCarsButtonClick(ActionEvent event) {
+        try {
+            openNewScene(event, "searchCarByID.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void onSearchCarByIDClick(ActionEvent event){
-        openNewScene(event, "searchCarByID.fxml");
+    public void onSearchCarByIDButtonClick(ActionEvent event) {
+        try {
+            openNewScene(event, "searchCarByID.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void onShowListCarsClick(ActionEvent event){
-        openNewScene(event, "showListCars.fxml");
+    public void onShowListCarsButtonClick(ActionEvent event) {
+        try {
+            openNewScene(event, "showListCars.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void onAddNewAdminClick(ActionEvent event){
-        openNewScene(event, "addNewAdmin.fxml");
+    public void onAddNewAdminButtonClick(ActionEvent event) {
+        try {
+            openNewScene(event, "addNewAdmin.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void openNewScene(ActionEvent event, String newScene){

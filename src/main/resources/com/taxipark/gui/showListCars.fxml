@@ -26,7 +26,7 @@
             <Font name="Segoe UI Light" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="callMenu" layoutX="491.0" layoutY="30.0" mnemonicParsing="false" onAction="#onCallMenuClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Меню" textFill="#eef1f5">
+      <Button fx:id="callMenuButton" layoutX="491.0" layoutY="30.0" mnemonicParsing="false" onAction="#onCallMenuButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Меню" textFill="#eef1f5">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
@@ -59,7 +59,7 @@
             <TableColumn fx:id="fuelConsumptionFor100km" prefWidth="179.0" text="Витрати пального за 100 км" />
         </columns>
       </TableView>
-      <Button fx:id="addFilter" layoutX="847.0" layoutY="520.0" mnemonicParsing="false" onAction="#onAddFilterClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnYellowWall" text="Додати фільтр" textFill="WHITE" visible="false">
+      <Button fx:id="addFilterButton" layoutX="847.0" layoutY="520.0" mnemonicParsing="false" onAction="#onAddFilterButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnYellowWall" text="Додати фільтр" textFill="WHITE" visible="false">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
@@ -107,7 +107,7 @@
             <Font size="15.0" />
          </font>
       </CheckBox>
-      <Button fx:id="clearFilter" layoutX="844.0" layoutY="529.0" mnemonicParsing="false" onAction="#onClearFilterClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnYellowWall" text="Очистити фільтри" textFill="WHITE">
+      <Button fx:id="clearFilterButton" layoutX="844.0" layoutY="529.0" mnemonicParsing="false" onAction="#onClearFilterButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnYellowWall" text="Очистити фільтри" textFill="WHITE">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
@@ -148,7 +148,7 @@
             <Image url="@../content/curved-arrow-with-broken-line.png" />
          </image>
       </ImageView>
-      <Button fx:id="stopSearch" layoutX="660.0" layoutY="140.0" mnemonicParsing="false" onAction="#onStopSearchClick" prefHeight="29.0" prefWidth="35.0" style="-fx-background-color: red; -fx-pref-width: 36; -fx-pref-height: 29;" styleClass="buttonOnYellowWall" text="Х" textFill="WHITE">
+      <Button fx:id="stopSearchButton" layoutX="660.0" layoutY="140.0" mnemonicParsing="false" onAction="#onStopSearchButtonClick" prefHeight="29.0" prefWidth="35.0" style="-fx-background-color: #dc3838; -fx-pref-width: 36; -fx-pref-height: 29;" styleClass="buttonOnYellowWall" text="Х" textFill="WHITE">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>

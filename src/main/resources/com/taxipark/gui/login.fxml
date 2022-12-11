@@ -32,7 +32,7 @@
             <Insets top="10.0" />
          </opaqueInsets>
       </TextField>
-      <Button fx:id="login" layoutX="773.0" layoutY="432.0" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="37.0" prefWidth="192.0" styleClass="buttonOnYellowWall" text="Увійти" textFill="#eef1f5">
+      <Button fx:id="loginButton" layoutX="773.0" layoutY="432.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="37.0" prefWidth="192.0" styleClass="buttonOnYellowWall" text="Увійти" textFill="#eef1f5">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>

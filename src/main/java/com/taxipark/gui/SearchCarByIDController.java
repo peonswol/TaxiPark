@@ -1,7 +1,6 @@
 package com.taxipark.gui;
 
 import com.taxipark.gui.component.Car;
-import com.taxipark.gui.component.ConnectToDataBase;
 import com.taxipark.gui.component.DeleteCar;
 import com.taxipark.gui.component.EditCarData;
 import javafx.collections.FXCollections;
@@ -12,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -96,64 +94,13 @@ public class SearchCarByIDController implements Initializable {
             this.nameParameterColumn = nameParameterColumn;
             this.characteristicColumn = characteristicColumn;
         }
-    //todo get
 
-    }
+        public String getNameParameterColumn() {
+            return nameParameterColumn;
+        }
 
-    private List<Car> getCarsFromDB(){
-
-        Connection connection = ConnectToDataBase.getConnection();
-
-        String getCars =
-                """
-                        select car."CarID", car."CarVIN", "general"."MarkAndModel","general"."YearManufacture", "general"."Cost", "general"."Color", "general"."MaxSpeed", "technic"."Transmission", "technic"."DriveType", "fuel"."FuelType", "fuel"."EngineType", "fuel"."EngineCapacity", "fuel"."FuelConsumptionFor100km", "moreInfo"."State", "moreInfo"."SecurityTypes", "moreInfo"."ComfortTypes"
-                        from "CarTable" as "car"
-                        inner join "GeneralInfoTable" as "general"
-                        on "car"."GeneralInfoID" = "general"."GeneralInfoID"
-                        inner join "FuelInfoTable" as "fuel"
-                        on "car"."FuelInfoID" = "fuel"."FuelInfoID"
-                        inner join "TechnicInfoTable" as "technic"
-                        on "car"."TechnicInfoID" = "technic"."TechnicInfoID"
-                        inner join "MoreInformationTable" as "moreInfo"
-                        on "car"."MoreInformationID" = "moreInfo"."MoreInformationID\"""";
-
-        try {
-
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(getCars);
-            Car tempCar;
-            List<Car> cars = new ArrayList<>();
-
-            while (result.next()) {
-                tempCar = new Car();
-                tempCar.setCarID(result.getInt("CarID"));
-                tempCar.setCarVIN(result.getString("CarVIN"));
-
-                tempCar.setMarkAndModel(result.getString("MarkAndModel"));
-                tempCar.setYearManufacture(result.getInt("YearManufacture"));
-                tempCar.setCost(result.getDouble("Cost"));
-                tempCar.setColor(result.getString("Color"));
-                tempCar.setMaxSpeed(result.getDouble("MaxSpeed"));
-
-                tempCar.setFuelType(result.getString("FuelType"));
-                tempCar.setEngineType(result.getString("EngineType"));
-                tempCar.setEngineCapacity(result.getDouble("EngineCapacity"));
-                tempCar.setFuelConsumptionFor100km(result.getDouble("FuelConsumptionFor100km"));
-
-                tempCar.setTransmission(result.getString("Transmission"));
-                tempCar.setDriveType(result.getString("DriveType"));
-
-                tempCar.setState(result.getString("State"));
-                tempCar.setSecurityTypes(result.getString("SecurityTypes"));
-                tempCar.setComfortTypes(result.getString("ComfortTypes"));
-
-                cars.add(tempCar);
-            }
-
-            return cars;
-
-        }catch (SQLException e) {
-            throw new RuntimeException(e);
+        public String getCharacteristicColumn() {
+            return characteristicColumn;
         }
     }
 
@@ -161,7 +108,7 @@ public class SearchCarByIDController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
-            cars = getCarsFromDB();
+            cars = Car.getCarsFromDB();
 
             if (cars.size() == 0) {
                 caseNoCar();
@@ -400,7 +347,7 @@ public class SearchCarByIDController implements Initializable {
             int id = carSelectedByID.getCarID();
             if (doActionWithSelectedCharacteristic()) {
                 goBackButton.setDisable(false);
-                cars = getCarsFromDB();
+                cars = Car.getCarsFromDB();
                 carSelectedByID = searchCarByID(id);
                 if (carSelectedByID != null){
                     setDataTable();

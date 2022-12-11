@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class EditCarData {
 
-    private Connection connection = ConnectToDataBase.getConnection();
+    private final Connection connection = ConnectToDataBase.getConnection();
 
     private PreparedStatement preparedStatement;
 
@@ -16,7 +16,7 @@ public class EditCarData {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(getID);
-            while (resultQuery.next()) {
+            if (resultQuery.next()) {
                 return resultQuery.getInt(1);
             }
         } catch (SQLException e) {
@@ -33,7 +33,7 @@ public class EditCarData {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(getID);
-            while (resultQuery.next()) {
+            if (resultQuery.next()) {
                 return resultQuery.getInt(1);
             }
         } catch (SQLException e) {
@@ -50,7 +50,7 @@ public class EditCarData {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(getID);
-            while (resultQuery.next()) {
+            if (resultQuery.next()) {
                 return resultQuery.getInt(1);
             }
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ public class EditCarData {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(getID);
-            while (resultQuery.next()) {
+            if (resultQuery.next()) {
                 return resultQuery.getInt(1);
             }
         } catch (SQLException e) {
@@ -77,10 +77,11 @@ public class EditCarData {
     }
 
     public void updateDataOfCar(Car car, String newData){
-        int id = car.getCarID();
-        String sql = "update \"CarTable\"\n" +
-                "set \"CarVIN\" = ?\n"+
-                "where \"CarID\" = ?";
+
+        String sql = """
+                update "CarTable"
+                set "CarVIN" = ?
+                where "CarID" = ?""";
 
         try{
             preparedStatement = connection.prepareStatement(sql);

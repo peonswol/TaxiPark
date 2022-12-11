@@ -5,6 +5,8 @@
     <file url="file://$PROJECT_DIR$/src/main/java/com/taxipark/gui/AddNewCarController.java" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/taxipark/gui/LoginController.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/taxipark/gui/MainMenuController.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/taxipark/gui/component/DeleteCar.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/taxipark/gui/component/EditCarData.java" dialect="GenericSQL" />
   </component>
   <component name="SqlResolveMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/com/taxipark/gui/AddNewCarController.java" scope="{&quot;node&quot;:{  &quot;@negative&quot;:&quot;1&quot;,  &quot;group&quot;:{   &quot;@kind&quot;:&quot;root&quot;,   &quot;node&quot;:{    &quot;@negative&quot;:&quot;1&quot;   }  } }}" />

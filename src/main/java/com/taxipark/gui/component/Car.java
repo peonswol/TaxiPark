@@ -2,6 +2,13 @@ package com.taxipark.gui.component;
 
 import javafx.collections.ObservableArray;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Car {
 
     private int carID;
@@ -152,6 +159,63 @@ public class Car {
 
     public void setCarVIN(String carVIN) {
         this.carVIN = carVIN;
+    }
+
+    public static List<Car> getCarsFromDB(){
+
+        Connection connection = ConnectToDataBase.getConnection();
+
+        String getCars =
+                """
+                        select car."CarID", car."CarVIN", "general"."MarkAndModel","general"."YearManufacture", "general"."Cost", "general"."Color", "general"."MaxSpeed", "technic"."Transmission", "technic"."DriveType", "fuel"."FuelType", "fuel"."EngineType", "fuel"."EngineCapacity", "fuel"."FuelConsumptionFor100km", "moreInfo"."State", "moreInfo"."SecurityTypes", "moreInfo"."ComfortTypes"
+                        from "CarTable" as "car"
+                        inner join "GeneralInfoTable" as "general"
+                        on "car"."GeneralInfoID" = "general"."GeneralInfoID"
+                        inner join "FuelInfoTable" as "fuel"
+                        on "car"."FuelInfoID" = "fuel"."FuelInfoID"
+                        inner join "TechnicInfoTable" as "technic"
+                        on "car"."TechnicInfoID" = "technic"."TechnicInfoID"
+                        inner join "MoreInformationTable" as "moreInfo"
+                        on "car"."MoreInformationID" = "moreInfo"."MoreInformationID\"""";
+
+        try {
+
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(getCars);
+            Car tempCar;
+            List<Car> cars = new ArrayList<>();
+
+            while (result.next()) {
+                tempCar = new Car();
+                tempCar.setCarID(result.getInt("CarID"));
+                tempCar.setCarVIN(result.getString("CarVIN"));
+
+                tempCar.setMarkAndModel(result.getString("MarkAndModel"));
+                tempCar.setYearManufacture(result.getInt("YearManufacture"));
+                tempCar.setCost(result.getDouble("Cost"));
+                tempCar.setColor(result.getString("Color"));
+                tempCar.setMaxSpeed(result.getDouble("MaxSpeed"));
+
+                tempCar.setFuelType(result.getString("FuelType"));
+                tempCar.setEngineType(result.getString("EngineType"));
+                tempCar.setEngineCapacity(result.getDouble("EngineCapacity"));
+                tempCar.setFuelConsumptionFor100km(result.getDouble("FuelConsumptionFor100km"));
+
+                tempCar.setTransmission(result.getString("Transmission"));
+                tempCar.setDriveType(result.getString("DriveType"));
+
+                tempCar.setState(result.getString("State"));
+                tempCar.setSecurityTypes(result.getString("SecurityTypes"));
+                tempCar.setComfortTypes(result.getString("ComfortTypes"));
+
+                cars.add(tempCar);
+            }
+
+            return cars;
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

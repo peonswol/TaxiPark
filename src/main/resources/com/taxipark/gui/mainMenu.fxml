@@ -17,18 +17,18 @@
             <Image url="@../content/taxi.png" />
          </image>
       </ImageView>
-      <Button fx:id="addNewCar" layoutX="38.0" layoutY="116.0" mnemonicParsing="false" onAction="#onAddNewCarClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Додати 🚗" textFill="WHITE">
+      <Button fx:id="addNewCarButton" layoutX="38.0" layoutY="116.0" mnemonicParsing="false" onAction="#onAddNewCarButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Додати 🚗" textFill="WHITE">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7a434" height="640.0" layoutX="620.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" styleClass="yellowRectangle" width="510.0" />
-      <Button fx:id="showListCars" layoutX="38.0" layoutY="171.0" mnemonicParsing="false" onAction="#onShowListCarsClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Список авто" textFill="WHITE">
+      <Button fx:id="showListCarsButton" layoutX="38.0" layoutY="171.0" mnemonicParsing="false" onAction="#onShowListCarsButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Список авто" textFill="WHITE">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="searchCarByID" layoutX="303.0" layoutY="116.0" mnemonicParsing="false" onAction="#onSearchCarByIDClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="🔎 ID авто" textFill="WHITE">
+      <Button fx:id="searchCarByIDButton" layoutX="303.0" layoutY="116.0" mnemonicParsing="false" onAction="#onSearchCarByIDButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="🔎 ID авто" textFill="WHITE">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
@@ -38,7 +38,7 @@
             <Font name="Segoe UI Light" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="addNewAdmin" layoutX="774.0" layoutY="442.0" mnemonicParsing="false" onAction="#onAddNewAdminClick" prefHeight="37.0" prefWidth="205.0" stylesheets="@designProject.css" text="Додати адміністратора" textFill="#eef1f5">
+      <Button fx:id="addNewAdminButton" layoutX="774.0" layoutY="442.0" mnemonicParsing="false" onAction="#onAddNewAdminButtonClick" prefHeight="37.0" prefWidth="205.0" stylesheets="@designProject.css" text="Додати адміністратора" textFill="#eef1f5">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
@@ -57,17 +57,17 @@
             <Font name="Bauhaus 93" size="25.0" />
          </font>
       </Label>
-      <Label fx:id="loginPerson" alignment="CENTER" contentDisplay="CENTER" layoutX="622.0" layoutY="272.0" prefHeight="28.0" prefWidth="510.0" text="Ваш логін" textFill="#f1e9db" textOverrun="CLIP">
+      <Label fx:id="loginPerson" alignment="CENTER" contentDisplay="CENTER" layoutX="633.0" layoutY="272.0" prefHeight="30.0" prefWidth="488.0" styleClass="TextAndPasswordFieldForEnterInYellowWall" text="Ваш логін" textFill="#f1e9db" textOverrun="CLIP">
          <font>
             <Font name="Segoe UI Light" size="19.0" />
          </font>
       </Label>
-      <Label fx:id="positionPerson" alignment="CENTER" layoutX="622.0" layoutY="326.0" prefHeight="28.0" prefWidth="510.0" text="Ваша посада" textFill="#f1e9db">
+      <Label fx:id="positionPerson" alignment="CENTER" layoutX="633.0" layoutY="326.0" prefHeight="30.0" prefWidth="488.0" styleClass="TextAndPasswordFieldForEnterInYellowWall" text="Ваша посада" textFill="#f1e9db">
          <font>
             <Font name="Segoe UI Light" size="19.0" />
          </font>
       </Label>
-      <Button fx:id="showCostCars" layoutX="303.0" layoutY="171.0" mnemonicParsing="false" onAction="#onShowCostCarsClick" prefHeight="37.0" prefWidth="188.0" styleClass="buttonOnBlueWall" text="Вартість автопарку" textFill="WHITE">
+      <Button fx:id="showCostCarsButton" layoutX="303.0" layoutY="171.0" mnemonicParsing="false" onAction="#onShowCostCarsButtonClick" prefHeight="37.0" prefWidth="188.0" styleClass="buttonOnBlueWall" text="Вартість автопарку" textFill="WHITE">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>

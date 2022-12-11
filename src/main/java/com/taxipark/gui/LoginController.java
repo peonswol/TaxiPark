@@ -31,7 +31,7 @@ public class LoginController {
     public static String admin;
 
     @FXML
-    protected void onLoginClick(ActionEvent event) {
+    protected void onLoginButtonClick(ActionEvent event) {
 
         admin = loginPerson.getText();
 
