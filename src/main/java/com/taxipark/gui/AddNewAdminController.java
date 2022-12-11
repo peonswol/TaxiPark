@@ -12,7 +12,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 
-//todo DO TRANSFORM
 public class AddNewAdminController implements Initializable {
     @FXML
     private Label messageInfo;

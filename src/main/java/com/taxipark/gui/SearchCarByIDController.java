@@ -96,14 +96,8 @@ public class SearchCarByIDController implements Initializable {
             this.nameParameterColumn = nameParameterColumn;
             this.characteristicColumn = characteristicColumn;
         }
+    //todo get
 
-        public String getNameParameterColumn() {
-            return nameParameterColumn;
-        }
-
-        public String getCharacteristicColumn() {
-            return characteristicColumn;
-        }
     }
 
     private List<Car> getCarsFromDB(){
@@ -165,56 +159,70 @@ public class SearchCarByIDController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cars = getCarsFromDB();
 
-        if (cars.size() == 0){
-            caseNoCar();
+        try {
+            cars = getCarsFromDB();
+
+            if (cars.size() == 0) {
+                caseNoCar();
+            } else {
+
+                setListCharacteristic();
+
+                for (Car car : cars) {
+                    selectListCar.getItems().add(car.getCarID());
+                }
+
+                for (int i = 1; i < listCharacteristic.size(); i++) {
+                    selectListCharacteristic.getItems().add(listCharacteristic.get(i));
+                }
+
+                enteringFuelTypeCar.getItems().addAll("А-100", "А-98", "А-95 Energy", "А-95", "А-92 Energy", "ДТ Energy", "ГАЗ");
+                enteringYearManufactureCar.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1970, 2022));
+                enteringEngineCapacityCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 3, 1, 0.1));
+                enteringFuelConsumptionFor100kmCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 20, 1, 0.1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else {
 
-            setListCharacteristic();
+    }
 
-            for (Car car : cars) {
-                selectListCar.getItems().add(car.getCarID());
-            }
-
-            for (int i = 1; i < listCharacteristic.size(); i++) {
-                selectListCharacteristic.getItems().add(listCharacteristic.get(i));
-            }
-
-            enteringFuelTypeCar.getItems().addAll("А-100", "А-98", "А-95 Energy", "А-95", "А-92 Energy", "ДТ Energy", "ГАЗ");
-            enteringYearManufactureCar.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1970, 2022));
-            enteringEngineCapacityCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 3, 1, 0.1));
-            enteringFuelConsumptionFor100kmCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 20, 1, 0.1));
+    private void caseNoCar() {
+        try {
+            deleteCarButton.setDisable(true);
+            editCarDataButton.setDisable(true);
+            saveChangeButton.setDisable(true);
+            selectListCar.setDisable(true);
+            setMainMessage("Авто немає!");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private void caseNoCar(){
-        deleteCarButton.setDisable(true);
-        editCarDataButton.setDisable(true);
-        saveChangeButton.setDisable(true);
-        selectListCar.setDisable(true);
-        setMainMessage("Авто немає!");
-    }
-    private void setListCharacteristic(){
-        listCharacteristic = new ArrayList<>();
+    private void setListCharacteristic() {
+        try {
+            listCharacteristic = new ArrayList<>();
 
-        listCharacteristic.add("ID");
-        listCharacteristic.add("VIN");
-        listCharacteristic.add("Марка і модель");
-        listCharacteristic.add("Рік збірки");
-        listCharacteristic.add("Вартість");
-        listCharacteristic.add("Колір");
-        listCharacteristic.add("Максимальна швидкість");
-        listCharacteristic.add("Коробка передач");
-        listCharacteristic.add("Тип приводу");
-        listCharacteristic.add("Тип пального");
-        listCharacteristic.add("Тип двигуна");
-        listCharacteristic.add("Об'єм двигуна");
-        listCharacteristic.add("Витрати пального за 100 км");
-        listCharacteristic.add("Стан");
-        listCharacteristic.add("Типи безпеки");
-        listCharacteristic.add("Типи комфорту");
+            listCharacteristic.add("ID");
+            listCharacteristic.add("VIN");
+            listCharacteristic.add("Марка і модель");
+            listCharacteristic.add("Рік збірки");
+            listCharacteristic.add("Вартість");
+            listCharacteristic.add("Колір");
+            listCharacteristic.add("Максимальна швидкість");
+            listCharacteristic.add("Коробка передач");
+            listCharacteristic.add("Тип приводу");
+            listCharacteristic.add("Тип пального");
+            listCharacteristic.add("Тип двигуна");
+            listCharacteristic.add("Об'єм двигуна");
+            listCharacteristic.add("Витрати пального за 100 км");
+            listCharacteristic.add("Стан");
+            listCharacteristic.add("Типи безпеки");
+            listCharacteristic.add("Типи комфорту");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private List<StringTable> createListToWrite(){
@@ -305,43 +313,51 @@ public class SearchCarByIDController implements Initializable {
         }
     }
 
-    public void onChooseCharacteristicButtonClick(ActionEvent event){
+    public void onChooseCharacteristicButtonClick(ActionEvent event) {
+        try {
+            boolean isSelected = true;
 
-        boolean isSelected = true;
+            if (selectListCharacteristic.getValue() == null) {
+                messageLabel.setText("Виберіть характеристику для редагування!!");
+                messageLabel.setVisible(true);
+                isSelected = false;
+            } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(3))) {
+                enteringYearManufactureCar.setVisible(true);
+            } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(9))) {
+                enteringFuelTypeCar.setVisible(true);
+            } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(11))) {
+                enteringEngineCapacityCar.setVisible(true);
+            } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(12))) {
+                enteringFuelConsumptionFor100kmCar.setVisible(true);
+            } else {
+                enteringData.setVisible(true);
+            }
 
-        if(selectListCharacteristic.getValue() == null){
-            messageLabel.setText("Виберіть характеристику для редагування!!");
-            messageLabel.setVisible(true);
-            isSelected = false;
-        } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(3))) {
-            enteringYearManufactureCar.setVisible(true);
-        } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(9))) {
-            enteringFuelTypeCar.setVisible(true);
-        } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(11))) {
-            enteringEngineCapacityCar.setVisible(true);
-        } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(12))) {
-            enteringFuelConsumptionFor100kmCar.setVisible(true);
-        } else {
-            enteringData.setVisible(true);
-        }
-
-        if(isSelected) {
-            messageLabel.setText("Введіть нові дані:");
-            chooseCharacteristicButton.setDisable(true);
-            turnOnVisibleButtonAndChoiceListOnChangingDataScene(true);
-            selectListCharacteristic.setDisable(true);
-            saveChangeButton.setDisable(false);
+            if (isSelected) {
+                messageLabel.setText("Введіть нові дані:");
+                chooseCharacteristicButton.setDisable(true);
+                turnOnVisibleButtonAndChoiceListOnChangingDataScene(true);
+                selectListCharacteristic.setDisable(true);
+                saveChangeButton.setDisable(false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public void onResetEditThisCharacteristicButtonClick(ActionEvent event){
-        turnOnVisibleButtonAndChoiceListOnChangingDataScene(false);
-        selectListCharacteristic.setVisible(true);
-        selectListCharacteristic.setDisable(false);
-        chooseCharacteristicButton.setDisable(false);
-        chooseCharacteristicButton.setVisible(true);
-        resetEditThisCharacteristicButton.setVisible(true);
-        turnOffAndClearAllEnteringField();
+        try {
+            turnOnVisibleButtonAndChoiceListOnChangingDataScene(false);
+            selectListCharacteristic.setVisible(true);
+            selectListCharacteristic.setDisable(false);
+            chooseCharacteristicButton.setDisable(false);
+            chooseCharacteristicButton.setVisible(true);
+            resetEditThisCharacteristicButton.setVisible(true);
+            turnOffAndClearAllEnteringField();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     public void onDeleteCarButtonClick(ActionEvent event){
@@ -365,17 +381,18 @@ public class SearchCarByIDController implements Initializable {
                 setMainMessage("Виберіть авто!");
             }
 
-
-            //todo
-
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
     public void setMainMessage(String message){
-        messageLabelMain.setText(message);
-        messageLabelMain.setVisible(true);
+        try {
+            messageLabelMain.setText(message);
+            messageLabelMain.setVisible(true);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void onSaveChangeButtonClick(ActionEvent event){
@@ -486,28 +503,39 @@ public class SearchCarByIDController implements Initializable {
     }
 
     private void turnOnVisibleButtonAndChoiceListOnMainScene(boolean bool){
-        selectListCar.setVisible(bool);
-        searchCarButton.setVisible(bool);
-        editCarDataButton.setVisible(bool);
-        deleteCarButton.setVisible(bool);
-        goBackwitoutSavingButton.setVisible(!bool);
-        messageLabelMain.setVisible(bool);
+        try {
+            selectListCar.setVisible(bool);
+            searchCarButton.setVisible(bool);
+            editCarDataButton.setVisible(bool);
+            deleteCarButton.setVisible(bool);
+            goBackwitoutSavingButton.setVisible(!bool);
+            messageLabelMain.setVisible(bool);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    private void turnOnVisibleButtonAndChoiceListOnChangingDataScene(boolean bool){
-
-        goBackButton.setVisible(bool);
-        saveChangeButton.setVisible(bool);
-        messageLabel.setVisible(bool);
+    private void turnOnVisibleButtonAndChoiceListOnChangingDataScene(boolean bool) {
+        try {
+            goBackButton.setVisible(bool);
+            saveChangeButton.setVisible(bool);
+            messageLabel.setVisible(bool);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void turnOffAndClearAllEnteringField(){
-        enteringData.setVisible(false);
-        enteringData.clear();
-        enteringYearManufactureCar.setVisible(false);
-        enteringEngineCapacityCar.setVisible(false);
-        enteringFuelTypeCar.setVisible(false);
-        enteringFuelConsumptionFor100kmCar.setVisible(false);
+    private void turnOffAndClearAllEnteringField() {
+        try {
+            enteringData.setVisible(false);
+            enteringData.clear();
+            enteringYearManufactureCar.setVisible(false);
+            enteringEngineCapacityCar.setVisible(false);
+            enteringFuelTypeCar.setVisible(false);
+            enteringFuelConsumptionFor100kmCar.setVisible(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
