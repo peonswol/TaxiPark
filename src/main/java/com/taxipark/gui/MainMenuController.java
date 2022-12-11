@@ -58,7 +58,7 @@ public class MainMenuController {
 
     public void onShowCostCarsButtonClick(ActionEvent event) {
         try {
-            openNewScene(event, "searchCarByID.fxml");
+            openNewScene(event, "showCostCars.fxml");
         } catch (Exception e) {
             e.printStackTrace();
         }

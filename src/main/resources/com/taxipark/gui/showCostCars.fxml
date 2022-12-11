@@ -23,24 +23,24 @@
          </font>
       </Label>
       <Accordion layoutX="236.0" layoutY="175.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eef1f5" height="100.0" layoutX="206.0" layoutY="243.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" width="718.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eef1f5" height="100.0" layoutX="206.0" layoutY="394.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" width="718.0" />
-      <Label layoutX="236.0" layoutY="268.0" prefHeight="18.0" prefWidth="427.0" text="Сума вартості всіх машин -" textFill="#1e3e74">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eef1f5" height="100.0" layoutX="206.0" layoutY="183.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" width="718.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eef1f5" height="100.0" layoutX="206.0" layoutY="343.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" width="718.0" />
+      <Label layoutX="236.0" layoutY="208.0" prefHeight="18.0" prefWidth="427.0" text="Сума вартості всіх машин -" textFill="#1e3e74">
          <font>
             <Font name="Segoe UI Light" size="33.0" />
          </font>
       </Label>
-      <Label layoutX="225.0" layoutY="420.0" prefHeight="18.0" prefWidth="427.0" text="Кількість машин - " textFill="#1e3e74">
+      <Label layoutX="225.0" layoutY="369.0" prefHeight="18.0" prefWidth="427.0" text="Кількість машин - " textFill="#1e3e74">
          <font>
             <Font name="Segoe UI Light" size="33.0" />
          </font>
       </Label>
-      <Label fx:id="sum" layoutX="652.0" layoutY="271.0" prefHeight="49.0" prefWidth="267.0" text="SUM" textFill="#1e3e74">
+      <Label fx:id="sum" layoutX="652.0" layoutY="211.0" prefHeight="49.0" prefWidth="267.0" text="SUM" textFill="#1e3e74">
          <font>
             <Font name="Segoe UI Light" size="33.0" />
          </font>
       </Label>
-      <Label fx:id="kst" layoutX="652.0" layoutY="420.0" prefHeight="49.0" prefWidth="267.0" text="KST" textFill="#1e3e74">
+      <Label fx:id="kst" layoutX="652.0" layoutY="369.0" prefHeight="49.0" prefWidth="267.0" text="KST" textFill="#1e3e74">
          <font>
             <Font name="Segoe UI Light" size="33.0" />
          </font>
@@ -50,5 +50,10 @@
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
+      <Label fx:id="carsImg" alignment="CENTER" layoutX="206.0" layoutY="456.0" prefHeight="49.0" prefWidth="718.0" textFill="#1e3e74">
+         <font>
+            <Font name="Segoe UI Light" size="33.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

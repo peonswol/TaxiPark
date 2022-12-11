@@ -18,21 +18,27 @@ public class ShowCostCarsController implements Initializable {
     @FXML
     private Label kst;
 
+    @FXML
+    private Label carsImg;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
             List<Car> cars = Car.getCarsFromDB();
 
-            kst.setText(String.valueOf(cars.size()));
+            StringBuilder showCars = new StringBuilder();
 
             double sumAllCar = 0;
 
             for (Car car : cars) {
                 sumAllCar += car.getCost();
+                showCars.append("🚗 ");
             }
 
             sum.setText(String.valueOf(sumAllCar));
+            kst.setText(String.valueOf(cars.size()));
+            carsImg.setText(showCars.toString());
 
         } catch (Exception e) {
             e.printStackTrace();
