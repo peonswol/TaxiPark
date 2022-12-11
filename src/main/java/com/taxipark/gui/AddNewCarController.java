@@ -274,7 +274,7 @@ public class AddNewCarController implements Initializable {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(checkIsLogin);
-            while (resultQuery.next()) {
+            if (resultQuery.next()) {
                 return resultQuery.getInt(1);
             }
 
@@ -294,7 +294,7 @@ public class AddNewCarController implements Initializable {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(checkIsLogin);
-            while (resultQuery.next()) {
+            if (resultQuery.next()) {
                 return resultQuery.getInt(1);
             }
         } catch (SQLException e) {
@@ -312,7 +312,7 @@ public class AddNewCarController implements Initializable {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(checkIsLogin);
-            while (resultQuery.next()) {
+            if (resultQuery.next()) {
                 return resultQuery.getInt(1);
             }
         } catch (SQLException e) {
@@ -330,7 +330,7 @@ public class AddNewCarController implements Initializable {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(checkIsLogin);
-            while (resultQuery.next()) {
+            if (resultQuery.next()) {
                 return resultQuery.getInt(1);
             }
         } catch (SQLException e) {
