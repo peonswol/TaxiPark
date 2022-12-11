@@ -13,105 +13,155 @@ import java.util.ResourceBundle;
 public class AddNewCarController implements Initializable {
 
     @FXML
-    Label labelInfo;
+    private Button saveDataButton;
 
     @FXML
-    Button callMenu;
+    private Button addAnotherCarButton;
 
     @FXML
-    Button saveData;
+    private TextField carVIN;
 
     @FXML
-    TextField markAndModelCar;
+    private TextField markAndModelCar;
 
     @FXML
-    TextField costCar;
+    private TextField costCar;
 
     @FXML
-    TextField colorCar;
+    private TextField colorCar;
 
     @FXML
-    TextField maxSpeedCar;
+    private TextField maxSpeedCar;
 
     @FXML
-    TextField transmissionCar;
+    private TextField transmissionCar;
 
     @FXML
-    TextField driveTypeCar;
+    private TextField driveTypeCar;
 
     @FXML
-    TextField engineTypeCar;
+    private TextField engineTypeCar;
 
     @FXML
-    TextField stateCar;
-
-
-    @FXML
-    TextArea securityTypesCar;
+    private TextField stateCar;
 
     @FXML
-    TextArea comfortTypesCar;
+    private TextArea securityTypesCar;
 
     @FXML
-    Spinner<Integer> yearManufactureCar;
+    private TextArea comfortTypesCar;
 
     @FXML
-    Spinner<Double> engineCapacityCar;
+    private Spinner<Integer> yearManufactureCar;
 
     @FXML
-    Spinner<Double> fuelConsumptionFor100kmCar;
+    private Spinner<Double> engineCapacityCar;
 
     @FXML
-    ChoiceBox<String> fuelTypeCar;
+    private Spinner<Double> fuelConsumptionFor100kmCar;
 
-    Connection connection = ConnectToDataBase.getConnection();
+    @FXML
+    private ChoiceBox<String> fuelTypeCar;
+
+    @FXML
+    private Label messageInfo;
+
+    private final Connection connection = ConnectToDataBase.getConnection();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fuelTypeCar.getItems().addAll("А-100", "А-98", "А-95 Energy", "А-95", "А-92 Energy", "ДТ Energy", "ГАЗ");
-        yearManufactureCar.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1970, 2022));
-        engineCapacityCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 3, 1, 0.1));
-        fuelConsumptionFor100kmCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 20, 1, 0.1));
+        try {
+            fuelTypeCar.getItems().addAll("А-100", "А-98", "А-95 Energy", "А-95", "А-92 Energy", "ДТ Energy", "ГАЗ");
+            yearManufactureCar.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1970, 2022));
+            engineCapacityCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 6, 1, 0.1));
+            fuelConsumptionFor100kmCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 20, 1, 0.1));
+        }catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
     }
 
     private boolean allDataIsNotEmpty(){
-        return !markAndModelCar.getText().isEmpty()
-                && !costCar.getText().isEmpty()
-                && !colorCar.getText().isEmpty()
-                && !maxSpeedCar.getText().isEmpty()
-                && !transmissionCar.getText().isEmpty()
-                && !driveTypeCar.getText().isEmpty()
-                && fuelTypeCar.getValue() != null
-                && !engineTypeCar.getText().isEmpty()
-                && !stateCar.getText().isEmpty()
-                && !securityTypesCar.getText().isEmpty()
-                && !comfortTypesCar.getText().isEmpty();
-    }
-
-    public void onCallMenuClick(ActionEvent event) {
-        LoginController loginController = new LoginController();
-        loginController.openMenu(event);
-    }
-
-    public void onSaveDataClick(ActionEvent event) {
-        if (!allDataIsNotEmpty()){
-            labelInfo.setText("Введіть ВСІ дані коректно");
+        try {
+            return !markAndModelCar.getText().isEmpty()
+                    && !costCar.getText().isEmpty()
+                    && !colorCar.getText().isEmpty()
+                    && !maxSpeedCar.getText().isEmpty()
+                    && !transmissionCar.getText().isEmpty()
+                    && !driveTypeCar.getText().isEmpty()
+                    && fuelTypeCar.getValue() != null
+                    && !engineTypeCar.getText().isEmpty()
+                    && !stateCar.getText().isEmpty()
+                    && !securityTypesCar.getText().isEmpty()
+                    && !comfortTypesCar.getText().isEmpty();
+        }catch (Exception exception){
+            exception.printStackTrace();
         }
-        else {
-            //todo check writing
-            addDataInDataBase();
-            labelInfo.setText("Авто успішно додано");
+        return false;
+    }
+
+    public void onCallMenuButtonClick(ActionEvent event) {
+        try {
+            LoginController loginController = new LoginController();
+            loginController.openMenu(event);
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+
+    }
+
+    public void onSaveDataButtonClick(ActionEvent event) {
+
+        try {
+            if (!allDataIsNotEmpty()){
+                setMessage("Введіть ВСІ дані коректно!");
+            }
+            else {
+                if(addDataInDataBase()) {
+                    setMessage("Авто успішно додано)");
+                    saveDataButton.setVisible(false);
+                    addAnotherCarButton.setVisible(true);
+                }else {
+                    setMessage("Виникла помилка запису авто!");
+                }
+            }
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+    }
+
+    public void onAddAnotherCarButtonClick(ActionEvent event){
+        try {
+            MainMenuController mainMenuController = new MainMenuController();
+            mainMenuController.openNewScene(event, "addNewCar.fxml");
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+
+    }
+
+    private void setMessage(String message){
+
+        try {
+            messageInfo.setText(message);
+            messageInfo.setVisible(true);
+        }catch (Exception exception){
+            exception.printStackTrace();
         }
     }
 
     private boolean addDataInDataBase() {
 
-        return insertGeneral() &&
-                insertTechnic() &&
-                insertFuel() &&
-                insertMoreInfo() &&
-                insertCar();
+        try {
+            return insertGeneral() &&
+                    insertTechnic() &&
+                    insertFuel() &&
+                    insertMoreInfo() &&
+                    insertCar();
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+        return false;
     }
 
 
@@ -294,8 +344,9 @@ public class AddNewCarController implements Initializable {
                 "                \"GeneralInfoID\", " +
                 "                \"TechnicInfoID\", " +
                 "                \"FuelInfoID\", " +
-                "                \"MoreInformationID\" " +
-                "        ) values(?,?,?,?)";
+                "                \"MoreInformationID\", " +
+                "                \"CarVIN\" " +
+                "        ) values(?,?,?,?,?)";
 
         int generalInfoID = getGeneralInfoID();
         int technicInfoID = getTechnicInfoID();
@@ -308,6 +359,7 @@ public class AddNewCarController implements Initializable {
             preparedStatement.setInt(2, technicInfoID);
             preparedStatement.setInt(3, fuelInfoID);
             preparedStatement.setInt(4, moreInformationID);
+            preparedStatement.setString(5, carVIN.getText());
             preparedStatement.executeUpdate();
 
             return true;

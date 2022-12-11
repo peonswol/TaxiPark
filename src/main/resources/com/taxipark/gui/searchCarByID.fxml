@@ -113,5 +113,10 @@
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
+      <Label fx:id="messageLabelMain" alignment="CENTER" layoutX="825.0" layoutY="199.0" prefHeight="21.0" prefWidth="307.0" stylesheets="@designProject.css" text="Label" textFill="#f1e9db" visible="false">
+         <font>
+            <Font name="Segoe UI Light" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -79,7 +79,7 @@ public class EditCarData {
     public void updateDataOfCar(Car car, String newData){
         int id = car.getCarID();
         String sql = "update \"CarTable\"\n" +
-                "set \"CarVIN\" = ?"+
+                "set \"CarVIN\" = ?\n"+
                 "where \"CarID\" = ?";
 
         try{

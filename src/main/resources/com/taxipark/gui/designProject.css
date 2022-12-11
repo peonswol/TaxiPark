@@ -3,7 +3,7 @@
     -fx-background-color: transparent;
     -fx-border-color:  #eaa88b;
     -fx-border-width:  0px 0px 2px 0px;
-    -fx-prompt-text-fill:  #f1e9db;
+    -fx-prompt-text-fill:  #eaa88b;
 }
 
 .TextAndPasswordFieldForEnterInYellowWall{
@@ -84,4 +84,8 @@
 .check-box:selected .box {
 
     -fx-background-color: #28a3f4;
+}
+
+.labelOnPink{
+    -fx-text-fill: #1e3e74;
 }

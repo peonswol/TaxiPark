@@ -167,17 +167,35 @@ public class SearchCarByIDController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cars = getCarsFromDB();
 
-        setListCharacteristic();
-
-        for (Car car:cars) {
-            selectListCar.getItems().add(car.getCarID());
+        if (cars.size() == 0){
+            caseNoCar();
         }
+        else {
 
-        for (int i = 1; i < listCharacteristic.size(); i++){
-            selectListCharacteristic.getItems().add(listCharacteristic.get(i));
+            setListCharacteristic();
+
+            for (Car car : cars) {
+                selectListCar.getItems().add(car.getCarID());
+            }
+
+            for (int i = 1; i < listCharacteristic.size(); i++) {
+                selectListCharacteristic.getItems().add(listCharacteristic.get(i));
+            }
+
+            enteringFuelTypeCar.getItems().addAll("А-100", "А-98", "А-95 Energy", "А-95", "А-92 Energy", "ДТ Energy", "ГАЗ");
+            enteringYearManufactureCar.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1970, 2022));
+            enteringEngineCapacityCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 3, 1, 0.1));
+            enteringFuelConsumptionFor100kmCar.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 20, 1, 0.1));
         }
     }
 
+    private void caseNoCar(){
+        deleteCarButton.setDisable(true);
+        editCarDataButton.setDisable(true);
+        saveChangeButton.setDisable(true);
+        selectListCar.setDisable(true);
+        setMainMessage("Авто немає!");
+    }
     private void setListCharacteristic(){
         listCharacteristic = new ArrayList<>();
 
@@ -236,7 +254,12 @@ public class SearchCarByIDController implements Initializable {
                 carSelectedByID = searchCarByID(id);
                 if (carSelectedByID != null){
                     setDataTable();
+                    setMainMessage("Дані про вибране авто виведено)");
+                }else {
+                    setMainMessage("Авто не знайдено!");
                 }
+            }else {
+                setMainMessage("Виберіть авто!");
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -271,7 +294,11 @@ public class SearchCarByIDController implements Initializable {
                     turnOnVisibleButtonAndChoiceListOnMainScene(false);
                     onResetEditThisCharacteristicButtonClick(event);
 
+                }else {
+                    setMainMessage("Авто не знайдено!");
                 }
+            }else {
+                setMainMessage("Виберіть авто!");
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -303,6 +330,7 @@ public class SearchCarByIDController implements Initializable {
             chooseCharacteristicButton.setDisable(true);
             turnOnVisibleButtonAndChoiceListOnChangingDataScene(true);
             selectListCharacteristic.setDisable(true);
+            saveChangeButton.setDisable(false);
         }
     }
 
@@ -313,23 +341,41 @@ public class SearchCarByIDController implements Initializable {
         chooseCharacteristicButton.setDisable(false);
         chooseCharacteristicButton.setVisible(true);
         resetEditThisCharacteristicButton.setVisible(true);
-        turnOffAllEnteringField();
+        turnOffAndClearAllEnteringField();
     }
 
     public void onDeleteCarButtonClick(ActionEvent event){
         try {
+            if (selectListCar.getValue() != null) {
+                int id = selectListCar.getValue();
+                carSelectedByID = searchCarByID(id);
 
-            DeleteCar deleteCar = new DeleteCar();
-            deleteCar.execute(carSelectedByID);
+                if (carSelectedByID != null) {
+                    DeleteCar deleteCar = new DeleteCar();
+                    deleteCar.execute(carSelectedByID);
 
-            MainMenuController mainMenuController = new MainMenuController();
-            mainMenuController.openNewScene(event, "searchCarByID.fxml");
+                    MainMenuController mainMenuController = new MainMenuController();
+                    mainMenuController.openNewScene(event, "searchCarByID.fxml");
+
+                    setMainMessage("Авто успішно видалено)");
+                }else {
+                    setMainMessage("Виникла помилка із видаленням!");
+                }
+            }else {
+                setMainMessage("Виберіть авто!");
+            }
+
 
             //todo
-            messageLabelMain.setText("Авто успішно видалено!");
+
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void setMainMessage(String message){
+        messageLabelMain.setText(message);
+        messageLabelMain.setVisible(true);
     }
 
     public void onSaveChangeButtonClick(ActionEvent event){
@@ -341,7 +387,13 @@ public class SearchCarByIDController implements Initializable {
                 carSelectedByID = searchCarByID(id);
                 if (carSelectedByID != null){
                     setDataTable();
+                    saveChangeButton.setDisable(true);
+                    goBackButton.setDisable(true);
+                    turnOffAndClearAllEnteringField();
+                    messageLabel.setText("Зміни успішно збережено!");
                 }
+            }else {
+                messageLabel.setText("Виникла помилка при збережені змін!");
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -399,7 +451,7 @@ public class SearchCarByIDController implements Initializable {
 
     public void onGoBackButtonClick(ActionEvent event){
         try {
-            turnOffAllEnteringField();
+            turnOffAndClearAllEnteringField();
             turnOnVisibleButtonAndChoiceListOnChangingDataScene(false);
             turnOnVisibleButtonAndChoiceListOnMainScene(true);
             selectListCharacteristic.setVisible(false);
@@ -439,6 +491,7 @@ public class SearchCarByIDController implements Initializable {
         editCarDataButton.setVisible(bool);
         deleteCarButton.setVisible(bool);
         goBackwitoutSavingButton.setVisible(!bool);
+        messageLabelMain.setVisible(bool);
     }
 
     private void turnOnVisibleButtonAndChoiceListOnChangingDataScene(boolean bool){
@@ -448,11 +501,16 @@ public class SearchCarByIDController implements Initializable {
         messageLabel.setVisible(bool);
     }
 
-    private void turnOffAllEnteringField(){
+    private void turnOffAndClearAllEnteringField(){
         enteringData.setVisible(false);
+        enteringData.clear();
         enteringYearManufactureCar.setVisible(false);
         enteringEngineCapacityCar.setVisible(false);
         enteringFuelTypeCar.setVisible(false);
         enteringFuelConsumptionFor100kmCar.setVisible(false);
+    }
+
+    private void clearAndDisableEnteringFields(){
+
     }
 }

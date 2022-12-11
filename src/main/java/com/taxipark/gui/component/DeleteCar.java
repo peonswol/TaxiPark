@@ -8,11 +8,13 @@ public class DeleteCar {
     private PreparedStatement preparedStatement;
 
     private int getGeneralInfoID(Car car){
-        String getID = "select \"GeneralInfoID\"\n" +
-                "from \"CarTable\"\n" +
-                "where \"CarID\" = " + car.getCarID();
 
         try {
+
+            String getID = "select \"GeneralInfoID\"\n" +
+                    "from \"CarTable\"\n" +
+                    "where \"CarID\" = " + car.getCarID();
+
             Statement statement = connection.createStatement();
             ResultSet resultQuery = statement.executeQuery(getID);
             while (resultQuery.next()) {
