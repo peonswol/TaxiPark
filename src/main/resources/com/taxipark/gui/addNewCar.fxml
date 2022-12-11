@@ -14,14 +14,14 @@
 
 <AnchorPane maxHeight="600.0" maxWidth="1200.0" minHeight="600.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #1e3e74;" styleClass="wall" stylesheets="@designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.AddNewCarController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6c9ef6" height="560.0" layoutX="-262.0" layoutY="81.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="check-box" width="1392.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6c9ef6" height="560.0" layoutX="-262.0" layoutY="81.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: #f1e9db;" width="1392.0" />
       <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="33.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../content/taxi.png" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7a434" height="82.0" layoutX="631.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" width="499.0" />
-      <Label fx:id="labelInfo" alignment="CENTER" layoutX="631.0" prefHeight="82.0" prefWidth="499.0" text="Введіть дані про нове авто" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+      <Label alignment="CENTER" layoutX="631.0" prefHeight="82.0" prefWidth="499.0" text="Введіть дані про нове авто" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Segoe UI Light" size="33.0" />
          </font>

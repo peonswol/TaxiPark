@@ -14,19 +14,19 @@
 
 <AnchorPane minWidth="1175.0" prefHeight="400.0" prefWidth="1175.0" styleClass="wall" stylesheets="@designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.AddNewAdminController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6c9ef6" height="555.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="662.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6c9ef6" height="555.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: #f1e9db;" width="662.0" />
       <ImageView fitHeight="51.0" fitWidth="52.0" layoutX="28.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../content/taxi.png" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7a434" height="640.0" layoutX="662.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" width="468.0" />
-      <Label fx:id="labelInfo" alignment="CENTER" layoutX="689.0" layoutY="59.0" prefHeight="108.0" prefWidth="297.0" text="Введіть дані про нового працівника" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+      <Label alignment="CENTER" layoutX="689.0" layoutY="59.0" prefHeight="108.0" prefWidth="297.0" text="Введіть дані про нового працівника" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Segoe UI Light" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="callMenu" layoutX="794.0" layoutY="443.0" mnemonicParsing="false" onAction="#onCallMenuClick" prefHeight="37.0" prefWidth="216.0" styleClass="buttonOnYellowWall" text="Меню" textFill="#eef1f5">
+      <Button fx:id="callMenuButton" layoutX="433.0" layoutY="26.0" mnemonicParsing="false" onAction="#onCallMenuButtonClick" prefHeight="37.0" prefWidth="216.0" styleClass="buttonOnYellowWall" text="Меню" textFill="#eef1f5">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
@@ -36,37 +36,37 @@
             <Font name="Bauhaus 93" size="25.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="137.0" prefHeight="28.0" prefWidth="250.0" text="Прізвище :" textFill="#f1e9db" textOverrun="CLIP">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="137.0" prefHeight="28.0" prefWidth="250.0" text="Прізвище :" textFill="#1e3e74" textOverrun="CLIP">
          <font>
             <Font name="Segoe UI Light" size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="188.0" prefHeight="28.0" prefWidth="250.0" text="Ім'я :" textFill="#f1e9db" textOverrun="CLIP">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="188.0" prefHeight="28.0" prefWidth="250.0" text="Ім'я :" textFill="#1e3e74" textOverrun="CLIP">
          <font>
             <Font name="Segoe UI Light" size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="239.0" prefHeight="28.0" prefWidth="250.0" text="По-батькові :" textFill="#f1e9db" textOverrun="CLIP">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="239.0" prefHeight="28.0" prefWidth="250.0" text="По-батькові :" textFill="#1e3e74" textOverrun="CLIP">
          <font>
             <Font name="Segoe UI Light" size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="290.0" prefHeight="28.0" prefWidth="250.0" text="Посада :" textFill="#f1e9db" textOverrun="CLIP">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="290.0" prefHeight="28.0" prefWidth="250.0" text="Посада :" textFill="#1e3e74" textOverrun="CLIP">
          <font>
             <Font name="Segoe UI Light" size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="348.0" prefHeight="28.0" prefWidth="250.0" text="Стать :" textFill="#f1e9db" textOverrun="CLIP">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="348.0" prefHeight="28.0" prefWidth="250.0" text="Стать :" textFill="#1e3e74" textOverrun="CLIP">
          <font>
             <Font name="Segoe UI Light" size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="401.0" prefHeight="28.0" prefWidth="250.0" text="Дата народження :" textFill="#f1e9db" textOverrun="CLIP">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="401.0" prefHeight="28.0" prefWidth="250.0" text="Дата народження :" textFill="#1e3e74" textOverrun="CLIP">
          <font>
             <Font name="Segoe UI Light" size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="459.0" prefHeight="28.0" prefWidth="250.0" text="Дата працевлаштування :" textFill="#f1e9db" textOverrun="CLIP">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="459.0" prefHeight="28.0" prefWidth="250.0" text="Дата працевлаштування :" textFill="#1e3e74" textOverrun="CLIP">
          <font>
             <Font name="Segoe UI Light" size="19.0" />
          </font>
@@ -77,14 +77,14 @@
          </font>
       </Label>
       <PasswordField fx:id="password" layoutX="913.0" layoutY="319.0" prefHeight="25.0" prefWidth="196.0" promptText="пароль" styleClass="TextAndPasswordFieldForEnterInYellowWall" stylesheets="@designProject.css" />
-      <DatePicker fx:id="dateBirth" layoutX="328.0" layoutY="403.0" prefHeight="25.0" prefWidth="196.0" promptText="дата народження" styleClass="ChoiceAndDateBoxForEnterInBlueWall" stylesheets="@designProject.css" />
-      <DatePicker fx:id="dateEmployment" layoutX="328.0" layoutY="461.0" prefHeight="25.0" prefWidth="196.0" promptText="дата працевлаштування" styleClass="ChoiceAndDateBoxForEnterInBlueWall" stylesheets="@designProject.css" />
-      <ChoiceBox fx:id="gender" layoutX="328.0" layoutY="350.0" prefHeight="25.0" prefWidth="196.0" styleClass="ChoiceAndDateBoxForEnterInBlueWall" stylesheets="@designProject.css" />
-      <TextField fx:id="position" layoutX="328.0" layoutY="292.0" prefHeight="25.0" prefWidth="196.0" promptText="посада" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
-      <TextField fx:id="middleName" layoutX="328.0" layoutY="241.0" prefHeight="25.0" prefWidth="196.0" promptText="по-батькові" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
-      <TextField fx:id="firstName" layoutX="328.0" layoutY="190.0" prefHeight="25.0" prefWidth="196.0" promptText="ім'я" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
-      <TextField fx:id="lastName" layoutX="328.0" layoutY="139.0" prefHeight="25.0" prefWidth="196.0" promptText="прізвище" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
-      <Button fx:id="saveData" layoutX="328.0" layoutY="575.0" mnemonicParsing="false" onAction="#onSaveDataClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Зберегти дані" textFill="#f1e9db">
+      <DatePicker fx:id="dateBirth" layoutX="328.0" layoutY="401.0" prefHeight="25.0" prefWidth="196.0" promptText="дата народження" styleClass="ChoiceAndDateBoxForEnterInBlueWall" stylesheets="@designProject.css" />
+      <DatePicker fx:id="dateEmployment" layoutX="328.0" layoutY="459.0" prefHeight="25.0" prefWidth="196.0" promptText="дата працевлаштування" styleClass="ChoiceAndDateBoxForEnterInBlueWall" stylesheets="@designProject.css" />
+      <ChoiceBox fx:id="gender" layoutX="328.0" layoutY="348.0" prefHeight="25.0" prefWidth="196.0" styleClass="ChoiceAndDateBoxForEnterInBlueWall" stylesheets="@designProject.css" />
+      <TextField fx:id="position" layoutX="328.0" layoutY="290.0" prefHeight="25.0" prefWidth="196.0" promptText="посада" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
+      <TextField fx:id="middleName" layoutX="328.0" layoutY="239.0" prefHeight="25.0" prefWidth="196.0" promptText="по-батькові" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
+      <TextField fx:id="firstName" layoutX="328.0" layoutY="188.0" prefHeight="25.0" prefWidth="196.0" promptText="ім'я" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
+      <TextField fx:id="lastName" layoutX="328.0" layoutY="137.0" prefHeight="25.0" prefWidth="196.0" promptText="прізвище" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
+      <Button fx:id="saveDataButton" layoutX="331.0" layoutY="551.0" mnemonicParsing="false" onAction="#onSaveDataButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Зберегти дані" textFill="#f1e9db">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
@@ -95,5 +95,15 @@
          </font>
       </Label>
       <TextField fx:id="login" layoutX="913.0" layoutY="255.0" prefHeight="27.0" prefWidth="196.0" promptText="логін" styleClass="TextAndPasswordFieldForEnterInYellowWall" stylesheets="@designProject.css" />
+      <Button fx:id="addAnotherAdminButton" layoutX="811.0" layoutY="486.0" mnemonicParsing="false" onAction="#onAddAnotherAdminButtonClick" prefHeight="37.0" prefWidth="216.0" styleClass="buttonOnYellowWall" text="Додати ще запис" textFill="#eef1f5" visible="false">
+         <font>
+            <Font name="Segoe UI Black" size="15.0" />
+         </font>
+      </Button>
+      <Label fx:id="messageInfo" layoutX="119.0" layoutY="559.0" text="Info" textFill="#1e3e74" visible="false">
+         <font>
+            <Font name="Segoe UI Light" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

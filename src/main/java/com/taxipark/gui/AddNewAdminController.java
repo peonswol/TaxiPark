@@ -8,7 +8,6 @@ import javafx.scene.control.*;
 
 import java.net.URL;
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -16,72 +15,106 @@ import java.util.ResourceBundle;
 //todo DO TRANSFORM
 public class AddNewAdminController implements Initializable {
     @FXML
-    Label labelInfo;
+    private Label messageInfo;
 
     @FXML
-    Button callMenu;
+    private Button saveDataButton;
 
     @FXML
-    Button saveData;
+    private Button addAnotherAdminButton;
 
     @FXML
-    TextField login;
+    private TextField login;
 
     @FXML
-    TextField password;
+    private TextField password;
 
     @FXML
-    TextField firstName;
+    private TextField firstName;
 
     @FXML
-    TextField lastName;
+    private TextField lastName;
 
     @FXML
-    TextField middleName;
+    private TextField middleName;
 
     @FXML
-    TextField position;
+    private TextField position;
 
     @FXML
-    ChoiceBox<String> gender;
+    private ChoiceBox<String> gender;
 
     @FXML
-    DatePicker dateBirth;
+    private DatePicker dateBirth;
 
     @FXML
-    DatePicker dateEmployment;
-
-    Connection connection = ConnectToDataBase.getConnection();
+    private DatePicker dateEmployment;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        gender.getItems().addAll("жінка", "чоловік");
-    }
-
-    private boolean allDataIsNotEmpty(){
-        return !login.getText().isEmpty()
-                && !password.getText().isEmpty()
-                && !firstName.getText().isEmpty()
-                && !middleName.getText().isEmpty()
-                && !lastName.getText().isEmpty()
-                && !position.getText().isEmpty()
-                && gender.getValue() != null
-                && !dateBirth.getValue().format(DateTimeFormatter.BASIC_ISO_DATE).equals("")
-                && !dateEmployment.getValue().format(DateTimeFormatter.BASIC_ISO_DATE).equals("");
-    }
-
-    public void onCallMenuClick(ActionEvent event) {
-        LoginController loginController = new LoginController();
-        loginController.openMenu(event);
-    }
-
-    public void onSaveDataClick(ActionEvent event) {
-        if (!allDataIsNotEmpty()){
-            labelInfo.setText("Введіть ВСІ дані коректно");
+        try {
+            gender.getItems().addAll("жінка", "чоловік");
+        }catch (Exception exception){
+            exception.printStackTrace();
         }
-        else {
-            addDataInDataBase();
-            labelInfo.setText("Користувача успішно додано");
+    }
+
+    private boolean allDataIsNotEmpty() {
+        try {
+            return !login.getText().isEmpty()
+                    && !password.getText().isEmpty()
+                    && !firstName.getText().isEmpty()
+                    && !middleName.getText().isEmpty()
+                    && !lastName.getText().isEmpty()
+                    && !position.getText().isEmpty()
+                    && gender.getValue() != null
+                    && !dateBirth.getValue().format(DateTimeFormatter.BASIC_ISO_DATE).equals("")
+                    && !dateEmployment.getValue().format(DateTimeFormatter.BASIC_ISO_DATE).equals("");
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return false;
+    }
+
+    public void onCallMenuButtonClick(ActionEvent event) {
+
+        try {
+            LoginController loginController = new LoginController();
+            loginController.openMenu(event);
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+
+    }
+
+    public void onSaveDataButtonClick(ActionEvent event) {
+        try {
+            if (!allDataIsNotEmpty()){
+                setMessage("Введіть ВСІ дані коректно!");
+            }
+            else {
+                if (addDataInDataBase()) {
+                    setMessage("Користувача успішно додано)");
+                    clearAndDisableAllEntering();
+                    saveDataButton.setVisible(false);
+                    addAnotherAdminButton.setVisible(true);
+                }else {
+                    setMessage("Виникла помилка при записі!");
+                }
+            }
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+
+    }
+
+    private void setMessage(String message){
+
+        try {
+            messageInfo.setText(message);
+            messageInfo.setVisible(true);
+        }catch (Exception exception){
+            exception.printStackTrace();
         }
     }
 
@@ -99,8 +132,10 @@ public class AddNewAdminController implements Initializable {
                 "        ) values(?,?,?,?,?,?,?,?,?)";
 
         try {
+            Connection connection = ConnectToDataBase.getConnection();
+
             PreparedStatement preparedStatement = connection.prepareStatement(inserting);
-            preparedStatement.setString(1, firstName.getText());
+            preparedStatement.setString(1, login.getText());
             preparedStatement.setString(2, firstName.getText());
             preparedStatement.setString(3, lastName.getText());
             preparedStatement.setString(4, middleName.getText());
@@ -124,6 +159,42 @@ public class AddNewAdminController implements Initializable {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public void onAddAnotherAdminButtonClick(ActionEvent event){
+        try {
+            MainMenuController mainMenuController = new MainMenuController();
+            mainMenuController.openNewScene(event, "addNewAdmin.fxml");
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+    }
+
+    private void clearAndDisableAllEntering(){
+
+        login.setDisable(true);
+        login.clear();
+
+        password.setDisable(true);
+        password.clear();
+
+        firstName.setDisable(true);
+        firstName.clear();
+
+        lastName.setDisable(true);
+        lastName.clear();
+
+        middleName.setDisable(true);
+        middleName.clear();
+
+        position.setDisable(true);
+        position.clear();
+
+        gender.setDisable(true);
+
+        dateBirth.setDisable(true);
+
+        dateEmployment.setDisable(true);
     }
 }
 
