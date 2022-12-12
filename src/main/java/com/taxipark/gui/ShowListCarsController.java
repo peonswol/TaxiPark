@@ -1,6 +1,7 @@
 package com.taxipark.gui;
 
 import com.taxipark.gui.component.Car;
+import com.taxipark.gui.component.CarInDataBase;
 import com.taxipark.gui.component.FilteringByObject;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
@@ -126,7 +127,7 @@ public class ShowListCarsController implements Initializable {
             initCheckBoxesArray();
 
 
-            List<Car> cars = Car.getCarsFromDB();
+            List<Car> cars = CarInDataBase.getCarsFromDB();
 
             id.setCellValueFactory(new PropertyValueFactory<>("carID"));
             vin.setCellValueFactory(new PropertyValueFactory<>("carVIN"));

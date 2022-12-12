@@ -1,6 +1,7 @@
 package com.taxipark.gui;
 
 import com.taxipark.gui.component.Car;
+import com.taxipark.gui.component.CarInDataBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,7 +26,7 @@ public class ShowCostCarsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
-            List<Car> cars = Car.getCarsFromDB();
+            List<Car> cars = CarInDataBase.getCarsFromDB();
 
             StringBuilder showCars = new StringBuilder();
 

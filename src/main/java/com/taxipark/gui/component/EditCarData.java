@@ -1,6 +1,8 @@
 package com.taxipark.gui.component;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditCarData {
 
@@ -8,221 +10,133 @@ public class EditCarData {
 
     private PreparedStatement preparedStatement;
 
-    private int getGeneralInfoID(Car car){
-        String getID = "select \"GeneralInfoID\"\n" +
-                "from \"CarTable\"\n" +
-                "where \"CarID\" = " + car.getCarID();
+    private Map<String, String> parameterToTable = new HashMap<>();
 
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultQuery = statement.executeQuery(getID);
-            if (resultQuery.next()) {
-                return resultQuery.getInt(1);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return 0;
+    private Map<String, String> parameterMap = new HashMap<>();
+
+    private String nameTable;
+
+    private String nameParameter;
+
+    private int id;
+
+    private String sql = """
+                update \"?\"
+                set \"?\" = ?
+                where ? = ?""";
+
+    public EditCarData(){
+        setMapParameter();
+        setMapParameterToTable();
     }
 
-    private int getTechnicInfoID(Car car){
-        String getID = "select \"TechnicInfoID\"\n" +
-                "from \"CarTable\"\n" +
-                "where \"CarID\" = " + car.getCarID();
-
+    private void setMapParameter() {
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultQuery = statement.executeQuery(getID);
-            if (resultQuery.next()) {
-                return resultQuery.getInt(1);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            parameterMap.put("ID", "CarID");
+            parameterMap.put("VIN", "CarVin");
+            parameterMap.put("Марка і модель", "MarkAndModel");
+            parameterMap.put("Рік збірки", "YearManufacture");
+            parameterMap.put("Вартість", "Cost");
+            parameterMap.put("Колір", "Color");
+            parameterMap.put("Максимальна швидкість", "MaxSpeed");
+            parameterMap.put("Коробка передач", "Transmission");
+            parameterMap.put("Тип приводу", "DriveType");
+            parameterMap.put("Тип пального", "FuelType");
+            parameterMap.put("Тип двигуна", "EngineType");
+            parameterMap.put("Об'єм двигуна", "EngineCapacity");
+            parameterMap.put("Витрати пального за 100 км", "FuelConsumptionFor100km");
+            parameterMap.put("Стан", "State");
+            parameterMap.put("Типи безпеки", "SecurityTypes");
+            parameterMap.put("Типи комфорту", "ComfortTypes");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return 0;
     }
 
-    private int getFuelInfoID(Car car){
-        String getID = "select \"FuelInfoID\"\n" +
-                "from \"CarTable\"\n" +
-                "where \"CarID\" = " + car.getCarID();
-
+    private void setMapParameterToTable() {
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultQuery = statement.executeQuery(getID);
-            if (resultQuery.next()) {
-                return resultQuery.getInt(1);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            parameterToTable.put("CarVIN", "Car");
+            parameterToTable.put("MarkAndModel", "GeneralInfo");
+            parameterToTable.put("YearManufacture", "GeneralInfo");
+            parameterToTable.put("Cost", "GeneralInfo");
+            parameterToTable.put("Color", "GeneralInfo");
+            parameterToTable.put("MaxSpeed", "GeneralInfo");
+            parameterToTable.put("Transmission", "TechnicInfo");
+            parameterToTable.put("DriveType", "TechnicInfo");
+            parameterToTable.put("FuelType", "FuelInfo");
+            parameterToTable.put("EngineType", "FuelInfo");
+            parameterToTable.put("EngineCapacity", "FuelInfo");
+            parameterToTable.put("FuelConsumptionFor100km", "FuelInfo");
+            parameterToTable.put("State", "MoreInformation");
+            parameterToTable.put("SecurityTypes", "MoreInformation");
+            parameterToTable.put("ComfortTypes", "MoreInformation");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return 0;
     }
 
-    private int getMoreInformationID(Car car){
-        String getID = "select \"MoreInformationID\"\n" +
-                "from \"CarTable\"\n" +
-                "where \"CarID\" = " + car.getCarID();
+    public void updateData(Car car, String parameter, String newData){
 
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultQuery = statement.executeQuery(getID);
-            if (resultQuery.next()) {
-                return resultQuery.getInt(1);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return 0;
-    }
-
-    public void updateDataOfCar(Car car, String newData){
-
-        String sql = """
-                update "CarTable"
-                set "CarVIN" = ?
-                where "CarID" = ?""";
+        initParamAndTable(car, parameter);
 
         try{
-            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = setParamAndTable();
             preparedStatement.setString(1, newData);
-            preparedStatement.setInt(2, car.getCarID());
-
             preparedStatement.execute();
-
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void updateDataOfGeneralInfo(Car car , String nameCharacteristic, String newData){
-        int id = getGeneralInfoID(car);
+    public void updateData(Car car, String parameter, double newData){
 
-        String sql = "update \"GeneralInfoTable\"\n" +
-                "set \"" + nameCharacteristic + "\"= ?\n"+
-                "where \"GeneralInfoID\" = ?";
+        initParamAndTable(car, parameter);
 
         try{
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, newData);
-            preparedStatement.setInt(2, id);
-
+            preparedStatement = setParamAndTable();
+            preparedStatement.setDouble(1, newData);
             preparedStatement.execute();
-
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void updateDataOfGeneralInfo(Car car , String nameCharacteristic, int newData){
-        int id = getGeneralInfoID(car);
+    public void updateData(Car car, String parameter, int newData){
 
-        String sql = "update \"GeneralInfoTable\"\n" +
-                "set \"" + nameCharacteristic + "\"= ?\n"+
-                "where \"GeneralInfoID\" = ?";
+        initParamAndTable(car, parameter);
 
         try{
-            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = setParamAndTable();
             preparedStatement.setInt(1, newData);
-            preparedStatement.setInt(2, id);
-
             preparedStatement.execute();
-
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void updateDataOfGeneralInfo(Car car , String nameCharacteristic, double newData) {
-        int id = getGeneralInfoID(car);
+    private void initParamAndTable(Car car, String parameter){
+        nameParameter = parameterMap.get(parameter);
+        nameTable = parameterToTable.get(nameParameter);
 
-        String sql = "update \"GeneralInfoTable\"\n" +
-                "set \"" + nameCharacteristic + "\"= ?\n" +
-                "where \"GeneralInfoID\" = ?";
-
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setDouble(1, newData);
-            preparedStatement.setInt(2, id);
-
-            preparedStatement.execute();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public void updateDataOfFuelInfo(Car car , String nameCharacteristic, String newData){
-        int id = getFuelInfoID(car);
-
-        String sql = "update \"FuelInfoTable\"\n" +
-                "set \"" + nameCharacteristic + "\"= ?\n" +
-                "where \"FuelInfoID\" = ?";
-
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, newData);
-            preparedStatement.setInt(2, id);
-
-            preparedStatement.execute();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        switch (nameTable) {
+            case "Car" -> id = car.getCarID();
+            case "GeneralInfo" -> id = CarInDataBase.getGeneralInfoID(car);
+            case "TechnicInfo" -> id = CarInDataBase.getTechnicInfoID(car);
+            case "FuelInfo" -> id = CarInDataBase.getFuelInfoID(car);
+            case "MoreInformation" -> id = CarInDataBase.getMoreInformationID(car);
         }
     }
 
-    public void updateDataOfFuelInfo(Car car , String nameCharacteristic, double newData){
-        int id = getFuelInfoID(car);
-
-        String sql = "update \"FuelInfoTable\"\n" +
-                "set \"" + nameCharacteristic + "\"= ?\n" +
-                "where \"FuelInfoID\" = ?";
-
+    private PreparedStatement setParamAndTable(){
         try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setDouble(1, newData);
+
+            PreparedStatement preparedStatement = connection.prepareStatement(String.format(
+                    "update \"%s\"\n" +
+                    "set \"%s\" = ?\n" +
+                    "where \"%s\" = ?", nameTable + "Table", nameParameter, nameTable + "ID"));
+
             preparedStatement.setInt(2, id);
-
-            preparedStatement.execute();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void updateDataOfTechnicInfo(Car car , String nameCharacteristic, String newData){
-        int id = getTechnicInfoID(car);
-
-        String sql = "update \"TechnicInfoTable\"\n" +
-                "set \"" + nameCharacteristic + "\"= ?\n" +
-                "where \"TechnicInfoID\" = ?";
-
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, newData);
-            preparedStatement.setInt(2, id);
-
-            preparedStatement.execute();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void updateDataOfMoreInformation(Car car, String nameCharacteristic, String newData){
-        int id = getMoreInformationID(car);
-
-        String sql = "update \"MoreInformationTable\"\n" +
-                "set \"" + nameCharacteristic + "\"= ?\n" +
-                "where \"MoreInformationID\" = ?";
-
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, newData);
-            preparedStatement.setInt(2, id);
-
-            preparedStatement.execute();
+            return preparedStatement;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

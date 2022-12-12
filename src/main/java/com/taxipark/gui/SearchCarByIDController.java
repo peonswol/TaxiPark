@@ -1,6 +1,7 @@
 package com.taxipark.gui;
 
 import com.taxipark.gui.component.Car;
+import com.taxipark.gui.component.CarInDataBase;
 import com.taxipark.gui.component.DeleteCar;
 import com.taxipark.gui.component.EditCarData;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class SearchCarByIDController implements Initializable {
@@ -108,7 +110,7 @@ public class SearchCarByIDController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
-            cars = Car.getCarsFromDB();
+            cars = CarInDataBase.getCarsFromDB();
 
             if (cars.size() == 0) {
                 caseNoCar();
@@ -172,6 +174,8 @@ public class SearchCarByIDController implements Initializable {
         }
     }
 
+
+
     private List<StringTable> createListToWrite(){
 
         List<StringTable> stringTableList = new ArrayList<>();
@@ -206,7 +210,7 @@ public class SearchCarByIDController implements Initializable {
         try {
             if (selectListCar.getValue() != null){
                 int id = selectListCar.getValue();
-                carSelectedByID = searchCarByID(id);
+                carSelectedByID = Car.searchCarByID(id, cars);
                 if (carSelectedByID != null){
                     setDataTable();
                     setMainMessage("Дані про вибране авто виведено)");
@@ -241,7 +245,7 @@ public class SearchCarByIDController implements Initializable {
         try {
             if (selectListCar.getValue() != null) {
                 int id = selectListCar.getValue();
-                carSelectedByID = searchCarByID(id);
+                carSelectedByID = Car.searchCarByID(id, cars);
 
                 if (carSelectedByID != null) {
                     labelInfo.setText("Виберіть параметр для оновлення інформації :");
@@ -311,7 +315,7 @@ public class SearchCarByIDController implements Initializable {
         try {
             if (selectListCar.getValue() != null) {
                 int id = selectListCar.getValue();
-                carSelectedByID = searchCarByID(id);
+                carSelectedByID = Car.searchCarByID(id, cars);
 
                 if (carSelectedByID != null) {
                     DeleteCar deleteCar = new DeleteCar();
@@ -347,12 +351,13 @@ public class SearchCarByIDController implements Initializable {
             int id = carSelectedByID.getCarID();
             if (doActionWithSelectedCharacteristic()) {
                 goBackButton.setDisable(false);
-                cars = Car.getCarsFromDB();
-                carSelectedByID = searchCarByID(id);
+                cars = CarInDataBase.getCarsFromDB();
+                carSelectedByID = Car.searchCarByID(id, cars);
                 if (carSelectedByID != null){
                     setDataTable();
                     saveChangeButton.setDisable(true);
-                    goBackButton.setDisable(true);
+                    goBackButton.setDisable(false);
+                    goBackwitoutSavingButton.setDisable(true);
                     turnOffAndClearAllEnteringField();
                     messageLabel.setText("Зміни успішно збережено!");
                 }
@@ -364,50 +369,32 @@ public class SearchCarByIDController implements Initializable {
         }
     }
 
-    private boolean doActionWithSelectedCharacteristic(){
+    private boolean doActionWithSelectedCharacteristic() {
         try {
 
             EditCarData editCarData = new EditCarData();
             boolean isSaved = true;
 
-            if(selectListCharacteristic.getValue() == null){
+            if (selectListCharacteristic.getValue() == null) {
                 messageLabel.setText("Введіть дані для збереження!!");
                 isSaved = false;
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(1))){
-                editCarData.updateDataOfCar(carSelectedByID, enteringData.getText());
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(2))){
-                editCarData.updateDataOfGeneralInfo(carSelectedByID, "MarkAndModel", enteringData.getText());
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(3))){
-                editCarData.updateDataOfGeneralInfo(carSelectedByID, "YearManufacture", enteringYearManufactureCar.getValue());
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(4))){
-                editCarData.updateDataOfGeneralInfo(carSelectedByID, "Cost", Double.parseDouble(enteringData.getText()));
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(5))){
-                editCarData.updateDataOfGeneralInfo(carSelectedByID, "Color", enteringData.getText());
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(6))){
-                editCarData.updateDataOfGeneralInfo(carSelectedByID, "MaxSpeed", Double.parseDouble(enteringData.getText()));
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(7))){
-                editCarData.updateDataOfTechnicInfo(carSelectedByID, "Transmission", enteringData.getText());
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(8))){
-                editCarData.updateDataOfTechnicInfo(carSelectedByID, "DriveType", enteringData.getText());
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(9))){
-                editCarData.updateDataOfFuelInfo(carSelectedByID, "FuelType", enteringFuelTypeCar.getValue());
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(10))){
-                editCarData.updateDataOfFuelInfo(carSelectedByID, "EngineType", enteringData.getText());
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(11))){
-                editCarData.updateDataOfFuelInfo(carSelectedByID, "EngineCapacity", enteringEngineCapacityCar.getValue());
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(12))){
-                editCarData.updateDataOfFuelInfo(carSelectedByID, "FuelConsumptionFor100km", enteringFuelConsumptionFor100kmCar.getValue());
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(13))){
-                editCarData.updateDataOfMoreInformation(carSelectedByID, "State", enteringData.getText());
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(14))){
-                editCarData.updateDataOfMoreInformation(carSelectedByID, "SecurityTypes", enteringData.getText());
-            }else if(selectListCharacteristic.getValue().equals(listCharacteristic.get(15))){
-                editCarData.updateDataOfMoreInformation(carSelectedByID, "ComfortTypes", enteringData.getText());
+            } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(6)) || selectListCharacteristic.getValue().equals(listCharacteristic.get(4))) {
+                editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), Double.parseDouble(enteringData.getText()));
+            } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(3))) {
+                editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringYearManufactureCar.getValue());
+            } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(9))) {
+                editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringFuelTypeCar.getValue());
+            } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(11))) {
+                editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringEngineCapacityCar.getValue());
+            } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(12))) {
+                editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringFuelConsumptionFor100kmCar.getValue());
+            } else {
+                editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringData.getText());
             }
 
             return isSaved;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
@@ -434,19 +421,6 @@ public class SearchCarByIDController implements Initializable {
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    private Car searchCarByID(int id){
-        try {
-            for (Car car:cars){
-                if (car.getCarID() == id){
-                    return car;
-                }
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
     }
 
     private void turnOnVisibleButtonAndChoiceListOnMainScene(boolean bool){
