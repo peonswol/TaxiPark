@@ -1,29 +1,22 @@
 package com.taxipark.gui.component;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
+import java.sql.*;
+import java.time.LocalDate;
 
 public class CheckingAdmin {
 
     Connection connection = ConnectToDataBase.getConnection();
 
     public boolean checkSizeAdminLoginAndPassword(String loginOrPassword) {
-        return loginOrPassword.length() <= 20 && loginOrPassword.length() >= 8;
+        return loginOrPassword.length() <= 30 && loginOrPassword.length() >= 8;
     }
 
     public boolean checkSizeAdminNameAndPosition(String nameOrPosition) {
         return nameOrPosition.length() <= 30 && nameOrPosition.length() >= 1;
     }
 
-    public boolean checkGender(char gender) {
-        return gender == 'ж' || gender == 'ч';
-    }
-
-    public boolean checkCorrectDate(Date dateBirth, Date dateEmployment) {
-        return dateEmployment.after(dateBirth);
+    public boolean checkCorrectDate(LocalDate dateBirth, LocalDate dateEmployment) {
+        return dateEmployment.isAfter(dateBirth);
     }
 
     public boolean isAdminInDB(String admin, String password) {

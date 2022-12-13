@@ -1,5 +1,6 @@
 package com.taxipark.gui;
 
+import com.taxipark.gui.component.CheckingAdmin;
 import com.taxipark.gui.component.ConnectToDataBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +9,6 @@ import javafx.scene.control.*;
 
 import java.net.URL;
 import java.sql.*;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 
@@ -49,6 +49,8 @@ public class AddNewAdminController implements Initializable {
     @FXML
     private DatePicker dateEmployment;
 
+    CheckingAdmin checkingAdmin = new CheckingAdmin();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         try {
@@ -58,21 +60,41 @@ public class AddNewAdminController implements Initializable {
         }
     }
 
-    private boolean allDataIsNotEmpty() {
+
+    private boolean allDataIsCorrectSize() {
         try {
-            return !login.getText().isEmpty()
-                    && !password.getText().isEmpty()
-                    && !firstName.getText().isEmpty()
-                    && !middleName.getText().isEmpty()
-                    && !lastName.getText().isEmpty()
-                    && !position.getText().isEmpty()
-                    && gender.getValue() != null
-                    && !dateBirth.getValue().format(DateTimeFormatter.BASIC_ISO_DATE).equals("")
-                    && !dateEmployment.getValue().format(DateTimeFormatter.BASIC_ISO_DATE).equals("");
+            return checkingAdmin.checkSizeAdminLoginAndPassword(login.getText())
+                    && checkingAdmin.checkSizeAdminLoginAndPassword(password.getText())
+                    && checkingAdmin.checkSizeAdminNameAndPosition(firstName.getText())
+                    && checkingAdmin.checkSizeAdminNameAndPosition(lastName.getText())
+                    && checkingAdmin.checkSizeAdminNameAndPosition(middleName.getText())
+                    && checkingAdmin.checkSizeAdminNameAndPosition(position.getText())
+                    && dateBirth.getValue() != null && dateEmployment.getValue() != null
+                    && gender.getValue() != null;
         } catch (Exception exception) {
             exception.printStackTrace();
         }
         return false;
+    }
+
+    private boolean allDataIsCorrect() {
+        try {
+            if (!allDataIsCorrectSize()){
+                setMessage("Введіть ВСІ дані і коректного розміру!\n\t(логін і пароль - 8-30\n\tрешта даних - <= 30)");
+                return false;
+            }
+            if (!checkingAdmin.isNotLoginInDB(login.getText())){
+                setMessage("Такий логін вже існує!");
+                return false;
+            }
+            if (!checkingAdmin.checkCorrectDate(dateBirth.getValue(), dateEmployment.getValue())){
+                setMessage("Введіть коректні дати!");
+                return false;
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return true;
     }
 
     public void onCallMenuButtonClick(ActionEvent event) {
@@ -88,10 +110,9 @@ public class AddNewAdminController implements Initializable {
 
     public void onSaveDataButtonClick(ActionEvent event) {
         try {
-            if (!allDataIsNotEmpty()){
-                setMessage("Введіть ВСІ дані коректно!");
-            }
-            else {
+            messageInfo.setVisible(false);
+
+            if (allDataIsCorrect()){
                 if (addDataInDataBase()) {
                     setMessage("Користувача успішно додано)");
                     clearAndDisableAllEntering();
@@ -104,7 +125,6 @@ public class AddNewAdminController implements Initializable {
         }catch (Exception exception){
             exception.printStackTrace();
         }
-
     }
 
     private void setMessage(String message){

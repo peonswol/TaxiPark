@@ -23,9 +23,6 @@ public class ShowListCarsController implements Initializable {
     private Button addFilterButton;
 
     @FXML
-    private Button clearFilterButton;
-
-    @FXML
     private Label labelListLimit;
 
     @FXML
