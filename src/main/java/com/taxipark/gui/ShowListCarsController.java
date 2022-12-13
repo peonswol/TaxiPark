@@ -116,7 +116,7 @@ public class ShowListCarsController implements Initializable {
 
     private boolean isInterval;
 
-    private CheckBox[] checkBoxes;
+    private List<CheckBox> checkBoxes;
 
     private boolean isSearching = false;
 
@@ -125,7 +125,6 @@ public class ShowListCarsController implements Initializable {
 
         try {
             initCheckBoxesArray();
-
 
             List<Car> cars = CarInDataBase.getCarsFromDB();
 
@@ -147,9 +146,9 @@ public class ShowListCarsController implements Initializable {
 
     private void initCheckBoxesArray() {
         try {
-            checkBoxes = new CheckBox[]{idCheckBox, vinCheckBox, markAndModelCheckBox,
+            checkBoxes = List.of(new CheckBox[]{idCheckBox, vinCheckBox, markAndModelCheckBox,
                     yearManufactureCheckBox, costCheckBox, colorCheckBox, maxSpeedCheckBox,
-                    fuelTypeCheckBox, fuelConsumptionFor100kmCheckBox};
+                    fuelTypeCheckBox, fuelConsumptionFor100kmCheckBox});
 
             turnOnDisable(true);
         } catch (Exception e) {
@@ -319,28 +318,14 @@ public class ShowListCarsController implements Initializable {
 
     private void turnOnCheckMenu(boolean bool) {
         try {
-            idCheckBox.setVisible(bool);
-            vinCheckBox.setVisible(bool);
-            markAndModelCheckBox.setVisible(bool);
-            yearManufactureCheckBox.setVisible(bool);
-            costCheckBox.setVisible(bool);
-            colorCheckBox.setVisible(bool);
-            maxSpeedCheckBox.setVisible(bool);
-            fuelTypeCheckBox.setVisible(bool);
-            fuelConsumptionFor100kmCheckBox.setVisible(bool);
+            for (CheckBox checkBox : checkBoxes) {
+                checkBox.setVisible( bool);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void swapVisibleButtons(boolean bool) {
-        try {
-            addFilterButton.setVisible(bool);
-            clearFilterButton.setVisible(!bool);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public void onClearFilterButtonClick(ActionEvent event) {
         try {
@@ -403,11 +388,13 @@ public class ShowListCarsController implements Initializable {
 
     }
 
+    //todo oth class
     private void doBySelectedCheckBox(String[] limit) {
 
         FilteringByObject filteringByObject = new FilteringByObject();
 
         try {
+
             if (idCheckBox.isSelected()) {
 
                 filteringByObject.filterByID(startLimit.getText(), endLimit.getText(), table.getItems());
@@ -462,7 +449,7 @@ public class ShowListCarsController implements Initializable {
             } else {
                 turnOnLimitList(bool);
             }
-            swapVisibleButtons(bool);
+            addFilterButton.setVisible(bool);
         } catch (Exception e) {
             e.printStackTrace();
         }

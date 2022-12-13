@@ -23,8 +23,8 @@
          </font>
       </Label>
       <Accordion layoutX="236.0" layoutY="175.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eef1f5" height="100.0" layoutX="206.0" layoutY="183.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" width="718.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eef1f5" height="100.0" layoutX="206.0" layoutY="343.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" width="718.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffbdb" height="100.0" layoutX="206.0" layoutY="183.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" width="718.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffbdb" height="100.0" layoutX="206.0" layoutY="343.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" width="718.0" />
       <Label layoutX="236.0" layoutY="208.0" prefHeight="18.0" prefWidth="427.0" text="Сума вартості всіх машин -" textFill="#1e3e74">
          <font>
             <Font name="Segoe UI Light" size="33.0" />

@@ -1,6 +1,6 @@
 package com.taxipark.gui;
 
-import com.taxipark.gui.component.ConnectToDataBase;
+import com.taxipark.gui.component.CheckingAdmin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,10 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class LoginController {
     @FXML
@@ -26,7 +22,7 @@ public class LoginController {
     private PasswordField passwordPerson;
 
     @FXML
-    private Label infoLogin;
+    private Label messageInfo;
 
     public static String admin;
 
@@ -35,36 +31,22 @@ public class LoginController {
 
         admin = loginPerson.getText();
 
-        Connection connection = ConnectToDataBase.getConnection();
-
-        String checkIsLogin = "select count(*)\n" +
-                "from \"Admins\"\n" +
-                "where \"Admins\".\"AdminLogin\" = '"+admin+
-                "' and \"Admins\".\"AdminPassword\" = '"+passwordPerson.getText()+"'";
-
+        CheckingAdmin checkingAdmin = new CheckingAdmin();
 
         try {
 
-            if (admin.isEmpty() || passwordPerson.getText().isEmpty()){
+            if (admin.isEmpty() || passwordPerson.getText().isEmpty()) {
                 throw new Exception();
             }
 
-            Statement statement = connection.createStatement();
-            ResultSet resultQuery = statement.executeQuery(checkIsLogin);
-
-            while (resultQuery.next()) {
-                if (resultQuery.getInt(1) == 1){
-                    openMenu(event);
-                }
-                else {
-                    throw new Exception();
-                }
-
+            if (checkingAdmin.isAdminInDB(loginPerson.getText(), passwordPerson.getText())) {
+                openMenu(event);
+            } else {
+                throw new Exception();
             }
-        }catch (SQLException e) {
-            throw new RuntimeException(e);
-        }catch (Exception e){
-            infoLogin.setText("Дані введено неправильно!\nСпробуйте ще раз)");
+
+        } catch (Exception e) {
+            messageInfo.setVisible(true);
         }
     }
 

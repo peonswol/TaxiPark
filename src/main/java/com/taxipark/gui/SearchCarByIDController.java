@@ -304,6 +304,7 @@ public class SearchCarByIDController implements Initializable {
             chooseCharacteristicButton.setDisable(false);
             chooseCharacteristicButton.setVisible(true);
             resetEditThisCharacteristicButton.setVisible(true);
+            goBackwitoutSavingButton.setDisable(false);
             turnOffAndClearAllEnteringField();
         }catch (Exception e){
             e.printStackTrace();

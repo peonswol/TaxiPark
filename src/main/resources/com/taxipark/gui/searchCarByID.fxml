@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,86 +15,61 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wall" stylesheets="@designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.SearchCarByIDController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6c9ef6" height="547.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="823.0" />
-      <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="38.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../content/taxi.png" />
-         </image>
-      </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7a434" height="640.0" layoutX="823.0" stroke="#423e3b" strokeType="INSIDE" strokeWidth="0.0" width="307.0">
-         <styleClass>
-            <String fx:value="yellowRectangle" />
-            <String fx:value="buttonOnYellowWall" />
-         </styleClass></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffbdb" height="547.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="823.0" />
       <Button fx:id="callMenuButton" layoutX="593.0" layoutY="30.0" mnemonicParsing="false" onAction="#onCallMenuButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Меню" textFill="#eef1f5">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Label layoutX="106.0" layoutY="34.0" prefHeight="25.0" prefWidth="250.0" text="PEONSWOLY TAXI" textFill="WHITE">
-         <font>
-            <Font name="Bauhaus 93" size="25.0" />
-         </font>
-      </Label>
-      <TableView fx:id="table" layoutX="7.0" layoutY="100.0" prefHeight="534.0" prefWidth="808.0">
+      <TableView fx:id="table" layoutX="7.0" layoutY="100.0" prefHeight="534.0" prefWidth="808.0" stylesheets="@designTable.css">
         <columns>
           <TableColumn fx:id="nameParameterColumn" prefWidth="158.0" text="Назва параметра" />
-          <TableColumn fx:id="characteristicColumn" prefWidth="669.0" text="Characteristic" />
+          <TableColumn fx:id="characteristicColumn" prefWidth="971.0" text="Characteristic" />
         </columns>
-         <contextMenu>
-            <ContextMenu>
-              <items>
-                <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-              </items>
-            </ContextMenu>
-         </contextMenu>
-         <tooltip>
-            <Tooltip text="Empty Tooltip" />
-         </tooltip>
       </TableView>
-      <Button fx:id="deleteCarButton" layoutX="888.0" layoutY="481.0" mnemonicParsing="false" onAction="#onDeleteCarButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnYellowWall" text="Видали авто з бази" textFill="WHITE">
+      <Button fx:id="deleteCarButton" layoutX="888.0" layoutY="481.0" mnemonicParsing="false" onAction="#onDeleteCarButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Видали авто з бази" textFill="WHITE">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="editCarDataButton" layoutX="888.0" layoutY="401.0" mnemonicParsing="false" onAction="#onEditCarDataButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnYellowWall" text="Редагувати дані авто" textFill="WHITE">
+      <Button fx:id="editCarDataButton" layoutX="888.0" layoutY="401.0" mnemonicParsing="false" onAction="#onEditCarDataButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Редагувати дані авто" textFill="WHITE">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Label fx:id="labelInfo" alignment="CENTER" layoutX="847.0" layoutY="16.0" prefHeight="168.0" prefWidth="287.0" text="Виберіть параметр для оновлення інформації :" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+      <Label fx:id="labelInfo" alignment="CENTER" layoutX="838.0" layoutY="16.0" prefHeight="168.0" prefWidth="281.0" text="Оберіть авто" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Segoe UI Light" size="33.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="selectListCar" layoutX="888.0" layoutY="234.0" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #A2BDF5;" />
-      <Button fx:id="searchCarButton" layoutX="888.0" layoutY="320.0" mnemonicParsing="false" onAction="#onSearchCarButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnYellowWall" text="Пошук авто" textFill="WHITE">
+      <ChoiceBox fx:id="selectListCar" layoutX="888.0" layoutY="234.0" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #fffbdb;" />
+      <Button fx:id="searchCarButton" layoutX="888.0" layoutY="320.0" mnemonicParsing="false" onAction="#onSearchCarButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Пошук авто" textFill="WHITE">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <ChoiceBox fx:id="selectListCharacteristic" layoutX="888.0" layoutY="209.0" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #A2BDF5;" visible="false" />
-      <TextField fx:id="enteringData" layoutX="888.0" layoutY="367.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInYellowWall" visible="false" />
+      <ChoiceBox fx:id="selectListCharacteristic" layoutX="888.0" layoutY="209.0" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #fffbdb;" visible="false" />
+      <TextField fx:id="enteringData" layoutX="888.0" layoutY="367.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInBlueDarkWall" stylesheets="@textInput.css" visible="false" />
       <Label fx:id="messageLabel" alignment="CENTER" layoutX="825.0" layoutY="320.0" prefHeight="25.0" prefWidth="307.0" text="Введіть нові дані:" textFill="#f1e9db" visible="false">
          <font>
             <Font name="Segoe UI Light" size="16.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="enteringFuelTypeCar" layoutX="888.0" layoutY="368.0" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #A2BDF5;" visible="false" />
-      <Spinner fx:id="enteringYearManufactureCar" layoutX="888.0" layoutY="368.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInYellowWall" visible="false" />
-      <Spinner fx:id="enteringEngineCapacityCar" layoutX="888.0" layoutY="368.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInYellowWall" visible="false" />
-      <Spinner fx:id="enteringFuelConsumptionFor100kmCar" layoutX="888.0" layoutY="368.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInYellowWall" visible="false" />
-      <Button fx:id="saveChangeButton" layoutX="888.0" layoutY="432.0" mnemonicParsing="false" onAction="#onSaveChangeButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnYellowWall" stylesheets="@designProject.css" text="Зберегти зміни" textFill="#eef1f5" visible="false">
+      <ChoiceBox fx:id="enteringFuelTypeCar" layoutX="888.0" layoutY="368.0" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #fffbdb;" visible="false" />
+      <Spinner fx:id="enteringYearManufactureCar" layoutX="888.0" layoutY="368.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInBlueWall" visible="false" />
+      <Spinner fx:id="enteringEngineCapacityCar" layoutX="888.0" layoutY="368.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInBlueWall" visible="false" />
+      <Spinner fx:id="enteringFuelConsumptionFor100kmCar" layoutX="888.0" layoutY="368.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInBlueWall" visible="false" />
+      <Button fx:id="saveChangeButton" layoutX="888.0" layoutY="432.0" mnemonicParsing="false" onAction="#onSaveChangeButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Зберегти зміни" textFill="#eef1f5" visible="false">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="goBackButton" disable="true" layoutX="888.0" layoutY="487.0" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnYellowWall" stylesheets="@designProject.css" text="Повернутися назад" textFill="#eef1f5" visible="false">
+      <Button fx:id="goBackButton" disable="true" layoutX="888.0" layoutY="487.0" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Повернутися назад" textFill="#eef1f5" visible="false">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="goBackwitoutSavingButton" layoutX="888.0" layoutY="543.0" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnYellowWall" stylesheets="@designProject.css" text="Назад без збереження" textFill="#eef1f5" visible="false">
+      <Button fx:id="goBackwitoutSavingButton" layoutX="888.0" layoutY="543.0" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Назад без збереження" textFill="#eef1f5" visible="false">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
@@ -118,5 +89,16 @@
             <Font name="Segoe UI Light" size="15.0" />
          </font>
       </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0f2f500" height="97.0" stroke="#fffbdb" strokeType="INSIDE" strokeWidth="5.0" width="823.0" />
+      <Label layoutX="104.0" layoutY="30.0" prefHeight="25.0" prefWidth="250.0" text="PEONSWOLY TAXI" textFill="#fffbdb">
+         <font>
+            <Font name="Bauhaus 93" size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="40.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../content/taxi.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
