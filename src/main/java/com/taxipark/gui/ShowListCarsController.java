@@ -388,7 +388,7 @@ public class ShowListCarsController implements Initializable {
 
     }
 
-    //todo oth class
+    //todo other class
     private void doBySelectedCheckBox(String[] limit) {
 
         FilteringByObject filteringByObject = new FilteringByObject();
