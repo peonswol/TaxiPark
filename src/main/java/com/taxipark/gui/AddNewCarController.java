@@ -1,5 +1,6 @@
 package com.taxipark.gui;
 
+import com.taxipark.gui.component.CheckingCar;
 import com.taxipark.gui.component.ConnectToDataBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,8 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+
+import static com.taxipark.gui.MainMenuController.setAlert;
 
 public class AddNewCarController implements Initializable {
 
@@ -63,10 +66,9 @@ public class AddNewCarController implements Initializable {
     @FXML
     private ChoiceBox<String> fuelTypeCar;
 
-    @FXML
-    private Label messageInfo;
-
     private final Connection connection = ConnectToDataBase.getConnection();
+
+    private final CheckingCar checkingCar = new CheckingCar();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -81,25 +83,6 @@ public class AddNewCarController implements Initializable {
 
     }
 
-    private boolean allDataIsNotEmpty(){
-        try {
-            return !markAndModelCar.getText().isEmpty()
-                    && !costCar.getText().isEmpty()
-                    && !colorCar.getText().isEmpty()
-                    && !maxSpeedCar.getText().isEmpty()
-                    && !transmissionCar.getText().isEmpty()
-                    && !driveTypeCar.getText().isEmpty()
-                    && fuelTypeCar.getValue() != null
-                    && !engineTypeCar.getText().isEmpty()
-                    && !stateCar.getText().isEmpty()
-                    && !securityTypesCar.getText().isEmpty()
-                    && !comfortTypesCar.getText().isEmpty();
-        }catch (Exception exception){
-            exception.printStackTrace();
-        }
-        return false;
-    }
-
     public void onCallMenuButtonClick(ActionEvent event) {
         try {
             LoginController loginController = new LoginController();
@@ -110,24 +93,66 @@ public class AddNewCarController implements Initializable {
 
     }
 
+
+    private boolean allDataIsCorrectSize() {
+        try {
+            return checkingCar.checkSizeVIN(carVIN.getText())
+                    && checkingCar.checkSizeMark(markAndModelCar.getText())
+                    && yearManufactureCar != null
+                    && checkingCar.stringIsDouble(costCar.getText())
+                    && checkingCar.checkSizeColor(colorCar.getText())
+                    && checkingCar.stringIsDouble(maxSpeedCar.getText())
+                    && !transmissionCar.getText().isEmpty()
+                    && !driveTypeCar.getText().isEmpty()
+                    && fuelTypeCar.getValue() != null
+                    && !engineTypeCar.getText().isEmpty()
+                    && engineCapacityCar.getValue() != null
+                    && fuelConsumptionFor100kmCar.getValue() != null
+                    && !stateCar.getText().isEmpty()
+                    && !securityTypesCar.getText().isEmpty()
+                    && !comfortTypesCar.getText().isEmpty();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean allDataIsCorrect() {
+        try {
+            if (!allDataIsCorrectSize()){
+                setAlert(Alert.AlertType.ERROR, "Введіть ВСІ дані і коректного розміру!", "Спробуйте ще раз, перевіривши розмір вводу або заповнивши пусті поля.\n*****\nVIN - 10\nмарка - <= 50\nколір - <= 20");
+                return false;
+            }
+            if (!checkingCar.isNotVINInDB(carVIN.getText())){
+                setAlert(Alert.AlertType.ERROR, "Такий VIN вже існує!", "Авто з введеним номером уже записаний");
+                return false;
+            }/*
+            if (!checkingAdmin.checkCorrectDate(dateBirth.getValue(), dateEmployment.getValue())){
+                setMessage("Введіть коректні дати!");
+                return false;
+            }*/
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return true;
+    }
+
     public void onSaveDataButtonClick(ActionEvent event) {
 
         try {
-            if (!allDataIsNotEmpty()){
-                setMessage("Введіть ВСІ дані коректно!");
-            }
-            else {
+            if (allDataIsCorrect()){
                 if(addDataInDataBase()) {
-                    setMessage("Авто успішно додано)");
+                    setAlert(Alert.AlertType.INFORMATION, "Авто успішно додано)", "");
                     saveDataButton.setVisible(false);
                     addAnotherCarButton.setVisible(true);
                     clearAndDisableAllEntering();
                 }else {
-                    setMessage("Виникла помилка запису авто!");
+                    setAlert(Alert.AlertType.ERROR, "Виникла помилка при записі!", "Спробуйте ще раз, перевіривши коректність запитів.");
                 }
             }
         }catch (Exception exception){
             exception.printStackTrace();
+            setAlert(Alert.AlertType.ERROR, "Виникла помилка при записі!", "Спробуйте ще раз, перевіривши коректність запитів.");
         }
     }
 
@@ -139,16 +164,6 @@ public class AddNewCarController implements Initializable {
             exception.printStackTrace();
         }
 
-    }
-
-    private void setMessage(String message){
-
-        try {
-            messageInfo.setText(message);
-            messageInfo.setVisible(true);
-        }catch (Exception exception){
-            exception.printStackTrace();
-        }
     }
 
     private boolean addDataInDataBase() {
@@ -164,7 +179,6 @@ public class AddNewCarController implements Initializable {
         }
         return false;
     }
-
 
     private boolean insertGeneral(){
 

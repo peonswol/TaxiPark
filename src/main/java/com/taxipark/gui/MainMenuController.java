@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -44,6 +45,20 @@ public class MainMenuController {
             e.printStackTrace();
         }
 
+    }
+
+    public static void setAlert(Alert.AlertType alertType, String headerText, String contentText){
+
+        try {
+            Alert alert = new Alert(alertType);
+            alert.setTitle("Інформація про запис авто");
+            alert.setHeaderText(headerText);
+            alert.setContentText(contentText);
+            alert.show();
+
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
     }
 
     //todo try

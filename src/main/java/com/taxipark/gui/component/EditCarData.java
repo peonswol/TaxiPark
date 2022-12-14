@@ -1,8 +1,12 @@
 package com.taxipark.gui.component;
 
+import javafx.scene.control.Alert;
+
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.taxipark.gui.MainMenuController.setAlert;
 
 public class EditCarData {
 
@@ -10,9 +14,9 @@ public class EditCarData {
 
     private PreparedStatement preparedStatement;
 
-    private Map<String, String> parameterToTable = new HashMap<>();
+    private final Map<String, String> parameterToTable = new HashMap<>();
 
-    private Map<String, String> parameterMap = new HashMap<>();
+    private final Map<String, String> parameterMap = new HashMap<>();
 
     private String nameTable;
 
@@ -20,10 +24,7 @@ public class EditCarData {
 
     private int id;
 
-    private String sql = """
-                update \"?\"
-                set \"?\" = ?
-                where ? = ?""";
+    CheckingCar checkingCar = new CheckingCar();
 
     public EditCarData(){
         setMapParameter();
@@ -75,7 +76,11 @@ public class EditCarData {
         }
     }
 
-    public void updateData(Car car, String parameter, String newData){
+    public boolean updateData(Car car, String parameter, String newData){
+
+        if (!allDataIsCorrect(parameter, String.valueOf(newData))){
+            return false;
+        }
 
         initParamAndTable(car, parameter);
 
@@ -83,12 +88,17 @@ public class EditCarData {
             preparedStatement = setParamAndTable();
             preparedStatement.setString(1, newData);
             preparedStatement.execute();
+            return true;
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void updateData(Car car, String parameter, double newData){
+    public boolean updateData(Car car, String parameter, double newData){
+
+        if (!allDataIsCorrect(parameter, String.valueOf(newData))){
+            return false;
+        }
 
         initParamAndTable(car, parameter);
 
@@ -96,12 +106,17 @@ public class EditCarData {
             preparedStatement = setParamAndTable();
             preparedStatement.setDouble(1, newData);
             preparedStatement.execute();
+            return true;
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void updateData(Car car, String parameter, int newData){
+    public boolean updateData(Car car, String parameter, int newData){
+
+        if (!allDataIsCorrect(parameter, String.valueOf(newData))){
+            return false;
+        }
 
         initParamAndTable(car, parameter);
 
@@ -109,12 +124,14 @@ public class EditCarData {
             preparedStatement = setParamAndTable();
             preparedStatement.setInt(1, newData);
             preparedStatement.execute();
+            return true;
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     private void initParamAndTable(Car car, String parameter){
+
         nameParameter = parameterMap.get(parameter);
         nameTable = parameterToTable.get(nameParameter);
 
@@ -131,9 +148,10 @@ public class EditCarData {
         try {
 
             PreparedStatement preparedStatement = connection.prepareStatement(String.format(
-                    "update \"%s\"\n" +
-                    "set \"%s\" = ?\n" +
-                    "where \"%s\" = ?", nameTable + "Table", nameParameter, nameTable + "ID"));
+                    """
+                            update "%s"
+                            set "%s" = ?
+                            where "%s" = ?""", nameTable + "Table", nameParameter, nameTable + "ID"));
 
             preparedStatement.setInt(2, id);
             return preparedStatement;
@@ -141,6 +159,64 @@ public class EditCarData {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private boolean allDataIsCorrectSize(String parameter, String newData) {
+        try {
+
+            switch (parameter) {
+                case "VIN" -> {
+                    if (checkingCar.checkSizeVIN(newData)) {
+                        return true;
+                    }
+                }
+                case "Марка і модель" -> {
+                    if (checkingCar.checkSizeMark(newData)) {
+                        return true;
+                    }
+                }
+                case "Вартість", "Максимальна швидкість" -> {
+                    if (checkingCar.stringIsDouble(newData)) {
+                        return true;
+                    }
+                }
+                case "Колір" -> {
+                    if (checkingCar.checkSizeColor(newData)) {
+                        return true;
+                    }
+                }
+                default -> {
+                    if (!newData.isEmpty()) {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean allDataIsCorrect(String parameter, String newData) {
+        try {
+            if (!allDataIsCorrectSize(parameter, newData)) {
+                setAlert(Alert.AlertType.ERROR, "Введіть ВСІ дані і коректного розміру!", "Спробуйте ще раз, перевіривши розмір вводу або заповнивши пусті поля.\n*****\nVIN - 10\nмарка - <= 50\nколір - <= 20");
+                return false;
+            }
+            if (parameter.equals("VIN")) {
+                if (!checkingCar.isNotVINInDB(newData)) {
+                    setAlert(Alert.AlertType.ERROR, "Такий VIN вже існує!", "Авто з введеним номером уже записаний");
+                    return false;
+                }/*
+            if (!checkingAdmin.checkCorrectDate(dateBirth.getValue(), dateEmployment.getValue())){
+                setMessage("Введіть коректні дати!");
+                return false;
+            }*/
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return true;
     }
 
 

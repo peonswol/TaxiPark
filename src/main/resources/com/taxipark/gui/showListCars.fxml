@@ -14,6 +14,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wall" stylesheets="@designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.ShowListCarsController">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0f2f500" height="97.0" stroke="#fffbdb" strokeType="INSIDE" strokeWidth="5.0" width="759.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffbdb" height="544.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="759.0" />
       <Label alignment="CENTER" layoutX="773.0" layoutY="-6.0" prefHeight="147.0" prefWidth="338.0" text="Відфільтрувати дані?" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
          <font>
@@ -127,7 +128,7 @@
             <Image url="@../content/setting.png" />
          </image>
       </ImageView>
-      <Label fx:id="infoToStop" layoutX="861.0" layoutY="105.0" text="Зупиніть спочатку пошук..." textFill="#1e3e74" visible="false">
+      <Label fx:id="infoToStop" layoutX="861.0" layoutY="105.0" text="Зупиніть спочатку пошук..." textFill="white" visible="false">
          <font>
             <Font name="Segoe UI Light" size="15.0" />
          </font>
@@ -142,7 +143,6 @@
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0f2f500" height="97.0" stroke="#fffbdb" strokeType="INSIDE" strokeWidth="5.0" width="759.0" />
       <Label layoutX="103.0" layoutY="34.0" prefHeight="25.0" prefWidth="250.0" text="PEONSWOLY TAXI" textFill="#fffbdb">
          <font>
             <Font name="Bauhaus 93" size="25.0" />

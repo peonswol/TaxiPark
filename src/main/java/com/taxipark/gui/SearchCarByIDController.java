@@ -1,9 +1,6 @@
 package com.taxipark.gui;
 
-import com.taxipark.gui.component.Car;
-import com.taxipark.gui.component.CarInDataBase;
-import com.taxipark.gui.component.DeleteCar;
-import com.taxipark.gui.component.EditCarData;
+import com.taxipark.gui.component.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,8 +11,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
+
+import static com.taxipark.gui.MainMenuController.setAlert;
 
 public class SearchCarByIDController implements Initializable {
 
@@ -360,10 +358,11 @@ public class SearchCarByIDController implements Initializable {
                     goBackButton.setDisable(false);
                     goBackwitoutSavingButton.setDisable(true);
                     turnOffAndClearAllEnteringField();
-                    messageLabel.setText("Зміни успішно збережено!");
+
+                    setAlert(Alert.AlertType.INFORMATION, "Зміни успішно збережено!", "");
                 }
             }else {
-                messageLabel.setText("Виникла помилка при збережені змін!");
+                setAlert(Alert.AlertType.ERROR, "Виникла помилка при записі!", "Спробуйте ще раз, перевіривши коректність запитів.");
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -373,24 +372,32 @@ public class SearchCarByIDController implements Initializable {
     private boolean doActionWithSelectedCharacteristic() {
         try {
 
+            CheckingCar checkingCar = new CheckingCar();
             EditCarData editCarData = new EditCarData();
-            boolean isSaved = true;
+            boolean isSaved = false;
 
             if (selectListCharacteristic.getValue() == null) {
                 messageLabel.setText("Введіть дані для збереження!!");
-                isSaved = false;
             } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(6)) || selectListCharacteristic.getValue().equals(listCharacteristic.get(4))) {
-                editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), Double.parseDouble(enteringData.getText()));
+                if (checkingCar.stringIsDouble(enteringData.getText())) {
+                    isSaved = editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), Double.parseDouble(enteringData.getText()));
+                }else {
+                    setAlert(Alert.AlertType.ERROR, "Некоректний тип даних!", "Введено некоректний тип даних, спробуйте ще раз");
+                }
             } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(3))) {
-                editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringYearManufactureCar.getValue());
+                isSaved = editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringYearManufactureCar.getValue());
             } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(9))) {
-                editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringFuelTypeCar.getValue());
+                if (enteringFuelTypeCar.getValue() != null) {
+                    isSaved = editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringFuelTypeCar.getValue());
+                }else{
+                    setAlert(Alert.AlertType.ERROR, "Пусте поле вводу!", "Виберіть тип пального, спробуйте ще раз");
+                }
             } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(11))) {
-                editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringEngineCapacityCar.getValue());
+                isSaved = editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringEngineCapacityCar.getValue());
             } else if (selectListCharacteristic.getValue().equals(listCharacteristic.get(12))) {
-                editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringFuelConsumptionFor100kmCar.getValue());
+                isSaved = editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringFuelConsumptionFor100kmCar.getValue());
             } else {
-                editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringData.getText());
+                isSaved = editCarData.updateData(carSelectedByID, selectListCharacteristic.getValue(), enteringData.getText());
             }
 
             return isSaved;

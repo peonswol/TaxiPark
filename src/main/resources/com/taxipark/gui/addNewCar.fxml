@@ -14,7 +14,8 @@
 
 <AnchorPane maxHeight="600.0" maxWidth="1200.0" minHeight="600.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #1e3e74;" styleClass="wall" stylesheets="@designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.AddNewCarController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0f2f500" height="116.0" layoutY="-1.0" stroke="#fffbdb" strokeType="INSIDE" strokeWidth="5.0" width="567.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0f2f500" height="124.0" layoutX="563.0" stroke="#fffbdb" strokeType="INSIDE" strokeWidth="5.0" width="567.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0f2f500" height="124.0" layoutY="-1.0" stroke="#fffbdb" strokeType="INSIDE" strokeWidth="5.0" width="567.0" />
       <Label layoutX="97.0" layoutY="29.0" prefHeight="25.0" prefWidth="250.0" text="PEONSWOLY TAXI" textFill="#fffbdb">
          <font>
             <Font name="Bauhaus 93" size="25.0" />
@@ -26,7 +27,7 @@
             <Image url="@../content/taxi.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="631.0" layoutY="2.0" prefHeight="82.0" prefWidth="499.0" text="Введіть дані про нове авто" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+      <Label alignment="CENTER" layoutX="567.0" layoutY="3.0" prefHeight="82.0" prefWidth="558.0" text="Введіть дані про нове авто" textFill="#f1e9db" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Segoe UI Light" size="33.0" />
          </font>
@@ -130,11 +131,6 @@
          </font>
       </Label>
       <TextField fx:id="markAndModelCar" layoutX="318.0" layoutY="180.0" prefHeight="25.0" prefWidth="196.0" promptText="марка і модель" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
-      <Label fx:id="messageInfo" alignment="CENTER" layoutX="581.0" layoutY="566.0" prefHeight="17.0" prefWidth="250.0" styleClass="labelOnPink" text="Info" visible="false">
-         <font>
-            <Font name="Segoe UI Light" size="15.0" />
-         </font>
-      </Label>
       <Button fx:id="addAnotherCarButton" layoutX="899.0" layoutY="556.0" mnemonicParsing="false" onAction="#onAddAnotherCarButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnYellowWall" text="Додати ще авто" textFill="#f1e9db" visible="false">
          <font>
             <Font name="Segoe UI Black" size="15.0" />

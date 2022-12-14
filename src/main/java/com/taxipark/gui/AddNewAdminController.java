@@ -11,10 +11,10 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
+import static com.taxipark.gui.MainMenuController.setAlert;
+
 
 public class AddNewAdminController implements Initializable {
-    @FXML
-    private Label messageInfo;
 
     @FXML
     private Button saveDataButton;
@@ -80,15 +80,15 @@ public class AddNewAdminController implements Initializable {
     private boolean allDataIsCorrect() {
         try {
             if (!allDataIsCorrectSize()){
-                setMessage("Введіть ВСІ дані і коректного розміру!\n\t(логін і пароль - 8-30\n\tрешта даних - <= 30)");
+                setAlert(Alert.AlertType.ERROR, "Введіть ВСІ дані і коректного розміру!", "Спробуйте ще раз, перевіривши розмір вводу або заповнивши пусті поля.\n*****\nлогін і пароль - 8-30\nрешта даних - <= 30");
                 return false;
             }
             if (!checkingAdmin.isNotLoginInDB(login.getText())){
-                setMessage("Такий логін вже існує!");
+                setAlert(Alert.AlertType.ERROR, "Такий логін вже існує!", "Адміністратор з введеним логіном уже записаний");
                 return false;
             }
             if (!checkingAdmin.checkCorrectDate(dateBirth.getValue(), dateEmployment.getValue())){
-                setMessage("Введіть коректні дати!");
+                setAlert(Alert.AlertType.ERROR, "Введіть коректні дати!", "Працевлаштування не може бути здійснене до народження людини...");
                 return false;
             }
         } catch (Exception exception) {
@@ -110,16 +110,15 @@ public class AddNewAdminController implements Initializable {
 
     public void onSaveDataButtonClick(ActionEvent event) {
         try {
-            messageInfo.setVisible(false);
 
             if (allDataIsCorrect()){
                 if (addDataInDataBase()) {
-                    setMessage("Користувача успішно додано)");
+                    setAlert(Alert.AlertType.INFORMATION, "Користувача успішно додано)", "");
                     clearAndDisableAllEntering();
                     saveDataButton.setVisible(false);
                     addAnotherAdminButton.setVisible(true);
                 }else {
-                    setMessage("Виникла помилка при записі!");
+                    setAlert(Alert.AlertType.ERROR, "Виникла помилка при записі!", "Спробуйте ще раз, перевіривши коректність запитів.");
                 }
             }
         }catch (Exception exception){
@@ -127,15 +126,7 @@ public class AddNewAdminController implements Initializable {
         }
     }
 
-    private void setMessage(String message){
 
-        try {
-            messageInfo.setText(message);
-            messageInfo.setVisible(true);
-        }catch (Exception exception){
-            exception.printStackTrace();
-        }
-    }
 
     private boolean addDataInDataBase() {
         String inserting = "insert into \"Admins\"(" +

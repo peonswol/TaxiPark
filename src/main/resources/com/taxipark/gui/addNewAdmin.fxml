@@ -99,11 +99,6 @@
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Label fx:id="messageInfo" layoutX="26.0" layoutY="539.0" prefHeight="62.0" prefWidth="275.0" styleClass="labelMessage" text="Info" textFill="#1e3e74" visible="false">
-         <font>
-            <Font name="Segoe UI Light" size="14.0" />
-         </font>
-      </Label>
       <Label layoutX="87.0" layoutY="33.0" prefHeight="25.0" prefWidth="250.0" text="PEONSWOLY TAXI" textFill="#fffbdb">
          <font>
             <Font name="Bauhaus 93" size="25.0" />
