@@ -8,13 +8,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1130.0" styleClass="wall" stylesheets="@designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1130.0" styleClass="wall" stylesheets="@../css/designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.MainMenuController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0f2f500" height="155.0" layoutY="78.0" stroke="#fffbdb" strokeType="INSIDE" strokeWidth="5.0" width="621.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffbdb" height="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="621.0" />
       <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="39.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../content/taxi.png" />
+            <Image url="@../image/taxi.png" />
          </image>
       </ImageView>
       <Button fx:id="addNewCarButton" layoutX="62.0" layoutY="108.0" mnemonicParsing="false" onAction="#onAddNewCarButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Додати 🚗" textFill="WHITE">
@@ -37,7 +37,7 @@
             <Font name="Segoe UI Light" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="addNewAdminButton" layoutX="774.0" layoutY="442.0" mnemonicParsing="false" onAction="#onAddNewAdminButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Додати адміністратора" textFill="#eef1f5">
+      <Button fx:id="addNewAdminButton" layoutX="774.0" layoutY="442.0" mnemonicParsing="false" onAction="#onAddNewAdminButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@../css/designProject.css" text="Додати адміністратора" textFill="#eef1f5">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
@@ -64,7 +64,7 @@
       </Button>
       <ImageView fitHeight="414.0" fitWidth="621.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../content/3644592.jpg" />
+            <Image url="@../image/3644592.jpg" />
          </image>
       </ImageView>
    </children>

@@ -13,16 +13,16 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wall" stylesheets="@designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.SearchCarByIDController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wall" stylesheets="@../css/designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.menu.SearchCarByIDController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0f2f500" height="97.0" stroke="#fffbdb" strokeType="INSIDE" strokeWidth="5.0" width="823.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffbdb" height="547.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="823.0" />
-      <Button fx:id="callMenuButton" layoutX="593.0" layoutY="30.0" mnemonicParsing="false" onAction="#onCallMenuButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Меню" textFill="#eef1f5">
+      <Button fx:id="callMenuButton" layoutX="593.0" layoutY="30.0" mnemonicParsing="false" onAction="#onCallMenuButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@../css/designProject.css" text="Меню" textFill="#eef1f5">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <TableView fx:id="table" layoutX="7.0" layoutY="100.0" prefHeight="534.0" prefWidth="808.0" stylesheets="@designTable.css">
+      <TableView fx:id="table" layoutX="7.0" layoutY="100.0" prefHeight="534.0" prefWidth="808.0" stylesheets="@../css/designTable.css">
         <columns>
           <TableColumn fx:id="nameParameterColumn" prefWidth="158.0" text="Назва параметра" />
           <TableColumn fx:id="characteristicColumn" prefWidth="971.0" text="Characteristic" />
@@ -50,7 +50,7 @@
          </font>
       </Button>
       <ChoiceBox fx:id="selectListCharacteristic" layoutX="888.0" layoutY="209.0" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #fffbdb;" visible="false" />
-      <TextField fx:id="enteringData" layoutX="888.0" layoutY="367.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInBlueDarkWall" stylesheets="@textInput.css" visible="false" />
+      <TextField fx:id="enteringData" layoutX="888.0" layoutY="367.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInBlueDarkWall" stylesheets="@../css/textInput.css" visible="false" />
       <Label fx:id="messageLabel" alignment="CENTER" layoutX="825.0" layoutY="320.0" prefHeight="25.0" prefWidth="307.0" text="Введіть нові дані:" textFill="#f1e9db" visible="false">
          <font>
             <Font name="Segoe UI Light" size="16.0" />
@@ -60,32 +60,32 @@
       <Spinner fx:id="enteringYearManufactureCar" layoutX="888.0" layoutY="368.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInBlueWall" visible="false" />
       <Spinner fx:id="enteringEngineCapacityCar" layoutX="888.0" layoutY="368.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInBlueWall" visible="false" />
       <Spinner fx:id="enteringFuelConsumptionFor100kmCar" layoutX="888.0" layoutY="368.0" prefHeight="25.0" prefWidth="205.0" styleClass="TextAndPasswordFieldForEnterInBlueWall" visible="false" />
-      <Button fx:id="saveChangeButton" layoutX="888.0" layoutY="432.0" mnemonicParsing="false" onAction="#onSaveChangeButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Зберегти зміни" textFill="#eef1f5" visible="false">
+      <Button fx:id="saveChangeButton" layoutX="888.0" layoutY="432.0" mnemonicParsing="false" onAction="#onSaveChangeButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@../css/designProject.css" text="Зберегти зміни" textFill="#eef1f5" visible="false">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="goBackButton" disable="true" layoutX="888.0" layoutY="487.0" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Повернутися назад" textFill="#eef1f5" visible="false">
+      <Button fx:id="goBackButton" disable="true" layoutX="888.0" layoutY="487.0" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@../css/designProject.css" text="Повернутися назад" textFill="#eef1f5" visible="false">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="goBackwitoutSavingButton" layoutX="888.0" layoutY="543.0" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Назад без збереження" textFill="#eef1f5" visible="false">
+      <Button fx:id="goBackwitoutSavingButton" layoutX="888.0" layoutY="543.0" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@../css/designProject.css" text="Назад без збереження" textFill="#eef1f5" visible="false">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="chooseCharacteristicButton" layoutX="888.0" layoutY="247.0" mnemonicParsing="false" onAction="#onChooseCharacteristicButtonClick" prefHeight="37.0" prefWidth="205.0" style="-fx-pref-width: 90; -fx-background-color: #5ae880;" styleClass="buttonOnYellowWall" stylesheets="@designProject.css" text="Вибрати" textFill="#eef1f5" visible="false">
+      <Button fx:id="chooseCharacteristicButton" layoutX="888.0" layoutY="247.0" mnemonicParsing="false" onAction="#onChooseCharacteristicButtonClick" prefHeight="37.0" prefWidth="205.0" style="-fx-pref-width: 90; -fx-background-color: #5ae880;" styleClass="buttonOnYellowWall" stylesheets="@../css/designProject.css" text="Вибрати" textFill="#eef1f5" visible="false">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="resetEditThisCharacteristicButton" layoutX="1003.0" layoutY="247.0" mnemonicParsing="false" onAction="#onResetEditThisCharacteristicButtonClick" prefHeight="37.0" prefWidth="205.0" style="-fx-pref-width: 90; -fx-background-color: #e55a5a;" styleClass="buttonOnYellowWall" stylesheets="@designProject.css" text="Скинути" textFill="#eef1f5" visible="false">
+      <Button fx:id="resetEditThisCharacteristicButton" layoutX="1003.0" layoutY="247.0" mnemonicParsing="false" onAction="#onResetEditThisCharacteristicButtonClick" prefHeight="37.0" prefWidth="205.0" style="-fx-pref-width: 90; -fx-background-color: #e55a5a;" styleClass="buttonOnYellowWall" stylesheets="@../css/designProject.css" text="Скинути" textFill="#eef1f5" visible="false">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <Label fx:id="messageLabelMain" alignment="CENTER" layoutX="825.0" layoutY="199.0" prefHeight="21.0" prefWidth="307.0" stylesheets="@designProject.css" text="Label" textFill="#f1e9db" visible="false">
+      <Label fx:id="messageLabelMain" alignment="CENTER" layoutX="825.0" layoutY="199.0" prefHeight="21.0" prefWidth="307.0" stylesheets="@../css/designProject.css" text="Label" textFill="#f1e9db" visible="false">
          <font>
             <Font name="Segoe UI Light" size="15.0" />
          </font>
@@ -97,7 +97,7 @@
       </Label>
       <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="40.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../content/taxi.png" />
+            <Image url="@../image/taxi.png" />
          </image>
       </ImageView>
    </children>

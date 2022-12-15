@@ -1,0 +1,102 @@
+
+.TextAndPasswordFieldForEnterInBlueWall{
+    -fx-background-color: transparent;
+    -fx-border-color:  #eaa88b;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-prompt-text-fill:  #eaa88b;
+}
+
+.TextAndPasswordFieldForEnterInYellowWall{
+    -fx-background-color: transparent;
+    -fx-border-color:  #6c9ef6;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-prompt-text-fill: #eef1f5;
+}
+
+.TextAndPasswordFieldForEnterInBlueDarkWall{
+    -fx-background-color: transparent;
+    -fx-border-color:  #eef1f5;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-prompt-text-fill:  #eef1f5;
+}
+
+.ChoiceAndDateBoxForEnterInBlueWall{
+    -fx-background-color: #fcd0ab;
+    -fx-border-color:  #eaa88b;
+    -fx-border-width:  0px 0px 2px 0px;
+}
+
+.wall{
+    -fx-background-color:  #1e3e74;
+    -fx-min-width: 1130;
+    -fx-min-height: 640;
+
+    -fx-max-width: 1130;
+    -fx-max-height: 640;
+
+    -fx-pref-width: 1130;
+    -fx-pref-height: 640;
+}
+
+.buttonOnBlueWall{
+    -fx-background-color:  #eaa88b;
+    -fx-text-fill: #f1e9db;
+}
+
+.buttonOnYellowWall{
+    -fx-background-color: #6c9ef6;
+    -fx-text-fill: #eef1f5;
+}
+
+.button{
+    -fx-pref-height: 37;
+    -fx-pref-width: 205;
+    -fx-background-radius: 50;
+    -fx-font-family: "Segoe UI Black";
+    -fx-font-size: 15;
+}
+
+.yellowRectangle{
+    -fx-pref-width: 510;
+    -fx-pref-height: 640;
+    -fx-fill: #f7a434;
+}
+
+.check-box{
+    -fx-fill: #f1e9db;
+    -fx-font-family: Segoe UI Light;
+}
+
+
+.check-box:disabled .box {
+    -fx-background-color: #6c9ef6;
+}
+
+.check-box .box {
+    -fx-border-radius:3px;
+    -fx-border-color:#eef1f5;
+    -fx-background-color: #eef1f5;
+}
+
+.check-box:selected .mark {
+
+    -fx-background-color: white;
+
+}
+
+.check-box:selected .box {
+
+    -fx-background-color: #28a3f4;
+}
+
+.labelOnPink{
+    -fx-text-fill: #1e3e74;
+}
+
+.labelMessage{
+    -fx-text-fill: #eef1f5;
+    -fx-font-family: Segoe UI Light;
+    -fx-font-size: 15;
+    -fx-background-color: #dc3838;
+    -fx-alignment: center;
+}

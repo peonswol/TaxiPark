@@ -1,6 +1,6 @@
 package com.taxipark.gui;
 
-import com.taxipark.gui.component.CheckingAdmin;
+import com.taxipark.component.CheckingAdmin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

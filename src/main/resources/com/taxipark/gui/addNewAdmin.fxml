@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="1175.0" prefHeight="400.0" prefWidth="1175.0" styleClass="wall" stylesheets="@designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.AddNewAdminController">
+<AnchorPane minWidth="1175.0" prefHeight="400.0" prefWidth="1175.0" styleClass="wall" stylesheets="@../css/designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.menu.AddNewAdminController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0f2f500" height="114.0" layoutY="-1.0" stroke="#fffbdb" strokeType="INSIDE" strokeWidth="5.0" width="662.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffbdb" height="549.0" layoutY="91.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="662.0" />
@@ -69,16 +69,16 @@
       </Label>
       <PasswordField fx:id="password" layoutX="913.0" layoutY="319.0" prefHeight="25.0" prefWidth="196.0" promptText="пароль" styleClass="TextAndPasswordFieldForEnterInBlueDarkWall">
          <stylesheets>
-            <URL value="@designProject.css" />
-            <URL value="@textInput.css" />
+            <URL value="@../css/designProject.css" />
+            <URL value="@../css/textInput.css" />
          </stylesheets></PasswordField>
-      <DatePicker fx:id="dateBirth" layoutX="328.0" layoutY="401.0" prefHeight="25.0" prefWidth="196.0" promptText="дата народження" styleClass="ChoiceAndDateBoxForEnterInBlueWall" stylesheets="@designProject.css" />
-      <DatePicker fx:id="dateEmployment" layoutX="328.0" layoutY="459.0" prefHeight="25.0" prefWidth="196.0" promptText="дата працевлаштування" styleClass="ChoiceAndDateBoxForEnterInBlueWall" stylesheets="@designProject.css" />
-      <ChoiceBox fx:id="gender" layoutX="328.0" layoutY="348.0" prefHeight="25.0" prefWidth="196.0" styleClass="ChoiceAndDateBoxForEnterInBlueWall" stylesheets="@designProject.css" />
-      <TextField fx:id="position" layoutX="328.0" layoutY="290.0" prefHeight="25.0" prefWidth="196.0" promptText="посада" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
-      <TextField fx:id="middleName" layoutX="328.0" layoutY="239.0" prefHeight="25.0" prefWidth="196.0" promptText="по-батькові" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
-      <TextField fx:id="firstName" layoutX="328.0" layoutY="188.0" prefHeight="25.0" prefWidth="196.0" promptText="ім'я" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
-      <TextField fx:id="lastName" layoutX="328.0" layoutY="137.0" prefHeight="25.0" prefWidth="196.0" promptText="прізвище" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@designProject.css" />
+      <DatePicker fx:id="dateBirth" layoutX="328.0" layoutY="401.0" prefHeight="25.0" prefWidth="196.0" promptText="дата народження" styleClass="ChoiceAndDateBoxForEnterInBlueWall" stylesheets="@../css/designProject.css" />
+      <DatePicker fx:id="dateEmployment" layoutX="328.0" layoutY="459.0" prefHeight="25.0" prefWidth="196.0" promptText="дата працевлаштування" styleClass="ChoiceAndDateBoxForEnterInBlueWall" stylesheets="@../css/designProject.css" />
+      <ChoiceBox fx:id="gender" layoutX="328.0" layoutY="348.0" prefHeight="25.0" prefWidth="196.0" styleClass="ChoiceAndDateBoxForEnterInBlueWall" stylesheets="@../css/designProject.css" />
+      <TextField fx:id="position" layoutX="328.0" layoutY="290.0" prefHeight="25.0" prefWidth="196.0" promptText="посада" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@../css/designProject.css" />
+      <TextField fx:id="middleName" layoutX="328.0" layoutY="239.0" prefHeight="25.0" prefWidth="196.0" promptText="по-батькові" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@../css/designProject.css" />
+      <TextField fx:id="firstName" layoutX="328.0" layoutY="188.0" prefHeight="25.0" prefWidth="196.0" promptText="ім'я" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@../css/designProject.css" />
+      <TextField fx:id="lastName" layoutX="328.0" layoutY="137.0" prefHeight="25.0" prefWidth="196.0" promptText="прізвище" styleClass="TextAndPasswordFieldForEnterInBlueWall" stylesheets="@../css/designProject.css" />
       <Button fx:id="saveDataButton" layoutX="331.0" layoutY="551.0" mnemonicParsing="false" onAction="#onSaveDataButtonClick" prefHeight="37.0" prefWidth="196.0" styleClass="buttonOnBlueWall" text="Зберегти дані" textFill="#f1e9db">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
@@ -91,8 +91,8 @@
       </Label>
       <TextField fx:id="login" layoutX="913.0" layoutY="255.0" prefHeight="27.0" prefWidth="196.0" promptText="логін" styleClass="TextAndPasswordFieldForEnterInBlueDarkWall">
          <stylesheets>
-            <URL value="@designProject.css" />
-            <URL value="@textInput.css" />
+            <URL value="@../css/designProject.css" />
+            <URL value="@../css/textInput.css" />
          </stylesheets></TextField>
       <Button fx:id="addAnotherAdminButton" layoutX="811.0" layoutY="486.0" mnemonicParsing="false" onAction="#onAddAnotherAdminButtonClick" prefHeight="37.0" prefWidth="216.0" styleClass="buttonOnYellowWall" text="Додати ще запис" textFill="#eef1f5" visible="false">
          <font>
@@ -106,7 +106,7 @@
       </Label>
       <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="26.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../content/taxi.png" />
+            <Image url="@../image/taxi.png" />
          </image>
       </ImageView>
    </children>

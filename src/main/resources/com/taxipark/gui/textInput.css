@@ -1,7 +1,0 @@
-.text-input:focused {
-    -fx-text-fill: white;
-}
-
-.text-input {
-    -fx-text-fill: #eaa88b;
-}

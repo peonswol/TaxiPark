@@ -1,6 +1,6 @@
 package com.taxipark.gui;
 
-import com.taxipark.gui.component.ConnectToDataBase;
+import com.taxipark.component.ConnectToDataBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -116,7 +116,4 @@ public class MainMenuController {
             throw new RuntimeException(e);
         }
     }
-
-
-
 }

@@ -9,12 +9,12 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wall" stylesheets="@designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.ShowCostCarsController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wall" stylesheets="@../css/designProject.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taxipark.gui.menu.ShowCostCarsController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fcd0ab" height="543.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1130.0" />
       <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="35.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../content/taxi.png" />
+            <Image url="@../image/taxi.png" />
          </image>
       </ImageView>
       <Label layoutX="100.0" layoutY="37.0" prefHeight="25.0" prefWidth="250.0" text="PEONSWOLY TAXI" textFill="WHITE">
@@ -45,7 +45,7 @@
             <Font name="Segoe UI Light" size="33.0" />
          </font>
       </Label>
-      <Button fx:id="callMenuButton" layoutX="889.0" layoutY="33.0" mnemonicParsing="false" onAction="#onCallMenuButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@designProject.css" text="Меню" textFill="#eef1f5">
+      <Button fx:id="callMenuButton" layoutX="889.0" layoutY="33.0" mnemonicParsing="false" onAction="#onCallMenuButtonClick" prefHeight="37.0" prefWidth="205.0" styleClass="buttonOnBlueWall" stylesheets="@../css/designProject.css" text="Меню" textFill="#eef1f5">
          <font>
             <Font name="Segoe UI Black" size="15.0" />
          </font>

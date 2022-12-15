@@ -17,7 +17,7 @@
    <children>
       <ImageView fitHeight="415.0" fitWidth="621.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../content/3644592.jpg" />
+            <Image url="@../image/3644592.jpg" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0f2f500" height="144.0" layoutY="86.0" stroke="#fffbdb" strokeType="INSIDE" strokeWidth="5.0" width="621.0" />
@@ -28,7 +28,7 @@
             <Font name="Segoe UI Light" size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="loginPerson" layoutX="744.0" layoutY="230.0" prefHeight="38.0" prefWidth="263.0" promptText="логін" stylesheets="@designProject.css">
+      <TextField fx:id="loginPerson" layoutX="744.0" layoutY="230.0" prefHeight="38.0" prefWidth="263.0" promptText="логін" stylesheets="@../css/designProject.css">
          <font>
             <Font size="17.0" />
          </font>
@@ -45,12 +45,12 @@
             <Font name="Segoe UI Black" size="15.0" />
          </font>
       </Button>
-      <PasswordField fx:id="passwordPerson" layoutX="744.0" layoutY="300.0" prefHeight="38.0" prefWidth="263.0" promptText="пароль" styleClass="TextAndPasswordFieldForEnterInBlueDarkWall" stylesheets="@designProject.css">
+      <PasswordField fx:id="passwordPerson" layoutX="744.0" layoutY="300.0" prefHeight="38.0" prefWidth="263.0" promptText="пароль" styleClass="TextAndPasswordFieldForEnterInBlueDarkWall" stylesheets="@../css/designProject.css">
          <font>
             <Font size="17.0" />
          </font>
       </PasswordField>
-      <Label fx:id="messageInfo" layoutX="707.0" layoutY="389.0" prefHeight="29.0" prefWidth="338.0" styleClass="labelMessage" stylesheets="@designProject.css" text="Користувача не знайдено або неправильні дані" visible="false" />
+      <Label fx:id="messageInfo" layoutX="707.0" layoutY="389.0" prefHeight="29.0" prefWidth="338.0" styleClass="labelMessage" stylesheets="@../css/designProject.css" text="Користувача не знайдено або неправильні дані" visible="false" />
       <Label layoutX="87.0" layoutY="33.0" prefHeight="25.0" prefWidth="250.0" text="PEONSWOLY TAXI" textFill="#1e3e74">
          <font>
             <Font name="Bauhaus 93" size="25.0" />
@@ -58,7 +58,7 @@
       </Label>
       <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="26.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../content/taxi.png" />
+            <Image url="@../image/taxi.png" />
          </image>
       </ImageView>
       <Label fx:id="infoLogin1" alignment="CENTER" layoutY="98.0" lineSpacing="9.0" prefHeight="119.0" prefWidth="621.0" text="Вас вітає програма для підтримки адміністрування організації PEONSWOLY TAXI" textAlignment="CENTER" textFill="#fffbdb" wrapText="true">
@@ -68,7 +68,7 @@
       </Label>
    </children>
    <stylesheets>
-      <URL value="@designProject.css" />
-      <URL value="@textInput.css" />
+      <URL value="@../css/designProject.css" />
+      <URL value="@../css/textInput.css" />
    </stylesheets>
 </Pane>
